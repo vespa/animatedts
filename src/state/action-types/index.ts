@@ -3,6 +3,7 @@ export enum ActionNavigateType {
   BOTTOM = "down",
   LEFT = "left",
   RIGHT = "right",
+  FIXED = "fixed",
 }
 
 export interface PositionProps {

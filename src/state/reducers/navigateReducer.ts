@@ -6,7 +6,7 @@ const initialState: PositionProps = {
   top: 0,
 };
 
-const reducer = (
+const reducerNavigation = (
   state: PositionProps = initialState,
   { type, payload }: ActionNavigate
 ) => {
@@ -19,9 +19,12 @@ const reducer = (
       return { ...state, left: state.left - payload };
     case ActionNavigateType.RIGHT:
       return { ...state, left: state.left + payload };
+    case ActionNavigateType.FIXED:
+      console.log(payload, "hi");
+      return payload;
     default:
       return state;
   }
 };
 
-export default reducer;
+export default reducerNavigation;

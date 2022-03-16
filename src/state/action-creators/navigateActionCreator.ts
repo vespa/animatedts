@@ -1,6 +1,10 @@
 import { Dispatch } from "redux";
 import { ActionNavigateType } from "../action-types";
-import { ActionNavigate } from "../actions";
+import {
+  ActionNavigate,
+  ActionNavigateFix,
+  ActionNavigateFixPayload,
+} from "../actions";
 
 export const moveTop = (pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
@@ -10,7 +14,6 @@ export const moveTop = (pos: number) => {
     });
   };
 };
-
 
 export const moveDown = (pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
@@ -38,6 +41,20 @@ export const moveLeft = (pos: number) => {
     });
   };
 };
+
+export const moveFixed = (pos: ActionNavigateFixPayload) => {
+  return (dispatch: Dispatch<ActionNavigateFix>) => {
+    dispatch({
+      type: ActionNavigateType.FIXED,
+      payload: {
+        left: pos.left,
+        top: pos.top,
+      },
+    });
+  };
+};
+
+
 
 
 

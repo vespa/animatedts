@@ -3,12 +3,15 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "./state";
-import { RootState } from "./state/reducers";
+// import { RootState } from "./state/reducers";
 import { Character, Stage } from "components";
+import { RootState } from "state/reducers";
 
 function App() {
-  const goto = 200;
-  const navigate = useSelector((state: RootState) => state.navigate);
+  const goto = 60;
+
+  // const navigate = useSelector((state: RootState) => state.navigate);
+  // console.log(navigate)
   const dispatch = useDispatch();
   const { moveTop, moveDown, moveLeft, moveRight } = bindActionCreators(
     navigateActionCreator,
@@ -17,14 +20,12 @@ function App() {
 
   return (
     <div className="App">
-      {console.log(navigate)}
-
       <button onClick={() => moveTop(goto)}>Move top</button>
       <button onClick={() => moveDown(goto)}>Move down</button>
       <button onClick={() => moveLeft(goto)}>Move left</button>
       <button onClick={() => moveRight(goto)}>Move right</button>
       <Stage>
-        <Character />
+        <Character startPosition={{ left: "50%", top: "50%" }} />
       </Stage>
     </div>
   );
