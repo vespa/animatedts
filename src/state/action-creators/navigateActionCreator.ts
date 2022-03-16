@@ -10,3 +10,34 @@ export const moveTop = (pos: number) => {
     });
   };
 };
+
+
+export const moveDown = (pos: number) => {
+  return (dispatch: Dispatch<ActionNavigate>) => {
+    dispatch({
+      type: ActionNavigateType.BOTTOM,
+      payload: pos,
+    });
+  };
+};
+
+export const moveRight = (pos: number) => {
+  return (dispatch: Dispatch<ActionNavigate>) => {
+    dispatch({
+      type: ActionNavigateType.RIGHT,
+      payload: pos,
+    });
+  };
+};
+
+export const moveLeft = (pos: number) => {
+  return (dispatch: Dispatch<ActionNavigate>) => {
+    dispatch({
+      type: ActionNavigateType.RIGHT,
+      payload: pos,
+    });
+  };
+};
+
+
+
