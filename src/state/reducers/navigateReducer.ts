@@ -16,9 +16,9 @@ const reducer = (
     case ActionNavigateType.BOTTOM:
       return { ...state, top: state.top + payload };
     case ActionNavigateType.LEFT:
-      return { ...state, left: state.top - payload };
+      return { ...state, left: state.left - payload };
     case ActionNavigateType.RIGHT:
-      return { ...state, left: state.top + payload };
+      return { ...state, left: state.left + payload };
     default:
       return state;
   }

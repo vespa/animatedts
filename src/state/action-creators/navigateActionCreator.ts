@@ -33,7 +33,7 @@ export const moveRight = (pos: number) => {
 export const moveLeft = (pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
-      type: ActionNavigateType.RIGHT,
+      type: ActionNavigateType.LEFT,
       payload: pos,
     });
   };
