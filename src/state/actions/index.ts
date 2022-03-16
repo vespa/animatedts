@@ -7,6 +7,7 @@ type ActionTypes =
   | ActionNavigateType.RIGHT
   | ActionNavigateType.FIXED;
 export interface ActionNavigate {
+  id: string;
   type: ActionTypes;
   payload: number;
 }
@@ -16,6 +17,7 @@ export interface ActionNavigateFixPayload {
   top: string | number;
 }
 export interface ActionNavigateFix {
+  id: string;
   type: ActionTypes;
   payload: ActionNavigateFixPayload;
 }

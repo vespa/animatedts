@@ -10,3 +10,7 @@ export interface PositionProps {
   left: number;
   top: number;
 }
+
+export interface CharGroupProps {
+  [key: string]: PositionProps;
+}

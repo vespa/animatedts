@@ -9,16 +9,14 @@ import styles from "./Character.module.scss";
 
 interface CharacterProps {
   //   navigate: PositionProps;
+  id: string;
   startPosition?: {
     left: string | number;
     top: string | number;
   };
 }
 
-export const Character: React.FC<CharacterProps> = ({
-  //   navigate,
-  startPosition,
-}) => {
+export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
   const [postion, setPosition] = useState({});
   const navigate = useSelector((state: RootState) => state.navigate);
   const dispatch = useDispatch();
@@ -27,7 +25,7 @@ export const Character: React.FC<CharacterProps> = ({
   const [firstRun, setFirstRun] = useState<boolean>(true);
 
   const convertNavigateToPX = () => {
-    const convertPos = Object.entries(navigate).map(([key, value]) => {
+    const convertPos = Object.entries(navigate[id]).map(([key, value]) => {
       return { [key]: `${value}px` };
     });
     return firstRun && startPosition
@@ -36,9 +34,9 @@ export const Character: React.FC<CharacterProps> = ({
   };
 
   useEffect(() => {
-    setPosition(convertNavigateToPX());
-    // setPosition(navigate);
-  }, [navigate]);
+    navigate[id] && setPosition(convertNavigateToPX());
+  }, [navigate[id]]);
+
   useEffect(() => {
     setTimeout(() => {
       elemRef.current &&
@@ -50,12 +48,12 @@ export const Character: React.FC<CharacterProps> = ({
             left: convertToNumber(left),
             top: convertToNumber(top),
           };
-          moveFixed(obj);
+          moveFixed(id, obj);
           setTimeout(() => {
             setFirstRun(false);
-          });
+          }, 50);
         })();
-    }, 100);
+    }, 50);
   }, []);
 
   return (

@@ -6,45 +6,50 @@ import {
   ActionNavigateFixPayload,
 } from "../actions";
 
-export const moveTop = (pos: number) => {
+export const moveTop = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
+      id,
       type: ActionNavigateType.TOP,
       payload: pos,
     });
   };
 };
 
-export const moveDown = (pos: number) => {
+export const moveDown = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
+      id,
       type: ActionNavigateType.BOTTOM,
       payload: pos,
     });
   };
 };
 
-export const moveRight = (pos: number) => {
+export const moveRight = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
+      id,
       type: ActionNavigateType.RIGHT,
       payload: pos,
     });
   };
 };
 
-export const moveLeft = (pos: number) => {
+export const moveLeft = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
+      id,
       type: ActionNavigateType.LEFT,
       payload: pos,
     });
   };
 };
 
-export const moveFixed = (pos: ActionNavigateFixPayload) => {
+export const moveFixed = (id: string, pos: ActionNavigateFixPayload) => {
   return (dispatch: Dispatch<ActionNavigateFix>) => {
     dispatch({
+      id,
       type: ActionNavigateType.FIXED,
       payload: {
         left: pos.left,

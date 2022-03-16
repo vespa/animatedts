@@ -1,4 +1,8 @@
-import { ActionNavigateType, PositionProps } from "../action-types";
+import {
+  ActionNavigateType,
+  PositionProps,
+  CharGroupProps,
+} from "../action-types";
 import { ActionNavigate } from "../actions";
 
 const initialState: PositionProps = {
@@ -7,21 +11,36 @@ const initialState: PositionProps = {
 };
 
 const reducerNavigation = (
-  state: PositionProps = initialState,
-  { type, payload }: ActionNavigate
+  state: CharGroupProps = {},
+  { id, type, payload }: ActionNavigate
 ) => {
+  const getCurrent = state[id] || initialState;
   switch (type) {
     case ActionNavigateType.TOP:
-      return { ...state, top: state.top - payload };
+      return {
+        ...state,
+        [id]: { ...getCurrent, top: getCurrent.top - payload },
+      };
     case ActionNavigateType.BOTTOM:
-      return { ...state, top: state.top + payload };
+      return {
+        ...state,
+        [id]: { ...getCurrent, top: getCurrent.top + payload },
+      };
     case ActionNavigateType.LEFT:
-      return { ...state, left: state.left - payload };
+      return {
+        ...state,
+        [id]: { ...getCurrent, left: getCurrent.left + payload },
+      };
     case ActionNavigateType.RIGHT:
-      return { ...state, left: state.left + payload };
+      return {
+        ...state,
+        [id]: { ...getCurrent, left: getCurrent.left - payload },
+      };
     case ActionNavigateType.FIXED:
-      console.log(payload, "hi");
-      return payload;
+      return {
+        ...state,
+        [id]: payload,
+      };
     default:
       return state;
   }
