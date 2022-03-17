@@ -19,7 +19,6 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
   const dispatch = useDispatch();
   const { moveFixed } = bindActionCreators(navigateActionCreator, dispatch);
   const elemRef = useRef(null);
-
   const convertNavigateToPX = () => {
     const convertPos = Object.entries(navigate[id]).map(([key, value]) => {
       return { [key]: `${value}px` };

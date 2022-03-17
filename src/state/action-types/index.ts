@@ -14,3 +14,14 @@ export interface PositionProps {
 export interface CharGroupProps {
   [key: string]: PositionProps;
 }
+
+
+// STAGE
+export interface StateStageProps {
+  width: number | string;
+  height: number | string;
+}
+
+export enum ActionStageType {
+  SET_STAGE_SIZE = "set_stage_size",
+}
