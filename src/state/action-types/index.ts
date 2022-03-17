@@ -15,7 +15,6 @@ export interface CharGroupProps {
   [key: string]: PositionProps;
 }
 
-
 // STAGE
 export interface StateStageProps {
   width: number;

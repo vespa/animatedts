@@ -29,12 +29,12 @@ const reducerNavigation = (
     case ActionNavigateType.LEFT:
       return {
         ...state,
-        [id]: { ...getCurrent, left: getCurrent.left + payload },
+        [id]: { ...getCurrent, left: getCurrent.left - payload },
       };
     case ActionNavigateType.RIGHT:
       return {
         ...state,
-        [id]: { ...getCurrent, left: getCurrent.left - payload },
+        [id]: { ...getCurrent, left: getCurrent.left + payload },
       };
     case ActionNavigateType.FIXED:
       return {

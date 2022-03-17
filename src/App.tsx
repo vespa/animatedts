@@ -20,7 +20,8 @@ function App() {
       <button onClick={() => moveDown(char1, goto)}>Move down</button>
       <button onClick={() => moveLeft(char1, goto)}>Move left</button>
       <button onClick={() => moveRight(char1, goto)}>Move right</button>
-      <button onClick={() => moveLeft("char2", goto)}>Move right 2</button>
+      <br />
+      <button onClick={() => moveRight("char2", goto)}>Move right 2</button>
       <Stage size={{ width: 800, height: 600 }}>
         <Character startPosition={{ left: "50%", top: "50%" }} id={char1} />
         <Character startPosition={{ left: "10%", top: "10%" }} id={"char2"} />
