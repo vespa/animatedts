@@ -5,10 +5,7 @@ import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "state";
 import { RootState } from "state/reducers";
 import styles from "./Character.module.scss";
-// import { PositionProps } from "state/action-types";
-
 interface CharacterProps {
-  //   navigate: PositionProps;
   id: string;
   startPosition?: {
     left: string | number;
@@ -17,20 +14,17 @@ interface CharacterProps {
 }
 
 export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
-  const [postion, setPosition] = useState({});
+  const [postion, setPosition] = useState<object>(startPosition || {});
   const navigate = useSelector((state: RootState) => state.navigate);
   const dispatch = useDispatch();
   const { moveFixed } = bindActionCreators(navigateActionCreator, dispatch);
   const elemRef = useRef(null);
-  const [firstRun, setFirstRun] = useState<boolean>(true);
 
   const convertNavigateToPX = () => {
     const convertPos = Object.entries(navigate[id]).map(([key, value]) => {
       return { [key]: `${value}px` };
     });
-    return firstRun && startPosition
-      ? startPosition
-      : Object.assign({}, ...convertPos);
+    return Object.assign({}, ...convertPos);
   };
 
   useEffect(() => {
@@ -49,12 +43,9 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
             top: convertToNumber(top),
           };
           moveFixed(id, obj);
-          setTimeout(() => {
-            setFirstRun(false);
-          }, 50);
         })();
-    }, 50);
-  }, []);
+    }, 100);
+  }, [startPosition]);
 
   return (
     <div style={{ ...postion }} className={styles.char} ref={elemRef}>
