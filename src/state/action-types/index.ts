@@ -18,8 +18,8 @@ export interface CharGroupProps {
 
 // STAGE
 export interface StateStageProps {
-  width: number | string;
-  height: number | string;
+  width: number;
+  height: number;
 }
 
 export enum ActionStageType {
