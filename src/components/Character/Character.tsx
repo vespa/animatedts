@@ -6,6 +6,8 @@ import { navigateActionCreator } from "state";
 import { PositionProps } from "state/action-types";
 import { RootState } from "state/reducers";
 import styles from "./Character.module.scss";
+
+import { useKeyControl, useArrowControl } from "hooks/UseArrowControl";
 interface CharacterProps {
   id: string;
   startPosition?: {
@@ -15,6 +17,8 @@ interface CharacterProps {
 }
 
 export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
+  const { onKeyUpAction } = useKeyControl();
+  const { up } = useArrowControl();
   const [postion, setPosition] = useState<object>(startPosition || {});
   const { navigate, stage } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
@@ -42,7 +46,7 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
       left: !(char.left < 0 || char.left > stage.width),
       top: !(char.top < 0 || char.top > stage.height),
     };
-    console.log(validateProps);
+
     return {
       valid: validateProps.left && validateProps.top,
       ...checkPos,
@@ -57,6 +61,15 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
         !check.valid && moveFixed(id, { ...check });
       })();
   }, [navigate[id]]);
+
+  useEffect(() => {
+    up.onPlay(() => {
+      console.log("up");
+    });
+    up.onStop(() => {
+      console.log("no up");
+    });
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
