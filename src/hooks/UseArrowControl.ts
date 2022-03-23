@@ -19,12 +19,10 @@ export const useArrowControl = () => {
   const commandFatory = (key: ArrowProps) => {
     return {
       onPlay: (action: (e: KeyboardEvent) => void) => {
-        setKeys(keys + 1);
         const command = wrap(action, key);
         window.addEventListener("keydown", command, true);
       },
       onStop: (action: (e: KeyboardEvent) => void) => {
-        setKeys(keys + 1);
         const command = wrap(action, key);
         window.addEventListener("keyup", command, true);
       },
@@ -36,5 +34,7 @@ export const useArrowControl = () => {
     down: commandFatory(ArrowProps.DOWN),
     left: commandFatory(ArrowProps.LEFT),
     right: commandFatory(ArrowProps.RIGHT),
+    keys,
+    setKeys,
   };
 };

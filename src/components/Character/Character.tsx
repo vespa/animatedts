@@ -21,72 +21,72 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
   const { up, down, left, right } = useArrowControl();
   const [position, setPosition] = useState<PositionProps>();
   const [animateClass, setAnimateClass] = useState("");
-  const { navigate, stage } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const { moveFixed } = bindActionCreators(navigateActionCreator, dispatch);
-
   const elemRef = useRef(null);
+  const elemCounter = useRef(null);
 
-  // const restrictElementToStage = () => {
-  //   const margin = 60;
-  //   const char: PositionProps = navigate[id];
-  //   const checkPos: PositionProps = {
-  //     left:
-  //       char.left < 0
-  //         ? margin
-  //         : char.left > stage.width
-  //         ? stage.width - margin
-  //         : char.left,
-  //     top:
-  //       char.top < 0
-  //         ? margin
-  //         : char.top > stage.height
-  //         ? stage.height - margin
-  //         : char.top,
-  //   };
-  //   const validateProps = {
-  //     left: !(char.left < 0 || char.left > stage.width),
-  //     top: !(char.top < 0 || char.top > stage.height),
-  //   };
+  const configureArrows = (target: HTMLDivElement, counter: HTMLDivElement) => {
+    const keyCounterName = "data-key-counter";
+    counter.setAttribute(keyCounterName, "");
+    const posArrows: {
+      [key: string]: string;
+    } = {
+      ArrowRight: styles.char_run_right,
+      ArrowLeft: styles.char_run_left,
+      ArrowUp: styles.char_run_up,
+      ArrowDown: styles.char_run_left,
+    };
 
-  //   return {
-  //     valid: validateProps.left && validateProps.top,
-  //     ...checkPos,
-  //   };
-  // };
-  let keyCount = 0;
-  const play = (classe: string, target: HTMLDivElement) => {
-    keyCount++;
-    target.style.animationPlayState = "pause";
-    updateCurrentPosition(() => {
-      target.classList.add(classe);
-      target.style.animationPlayState = "running";
-      setAnimateClass(classe);
-    });
-  };
+    const addLastCommand = (command: string) => {
+      const current = counter.getAttribute(keyCounterName);
+      counter.setAttribute(keyCounterName, `${current} ${command}`);
+    };
 
-  const configureArrows = (target: HTMLDivElement) => {
-    const stop = () => {
-      keyCount++;
-      target.style.animationPlayState = "paused";
+    const removeLastCommand = (command: string) => {
+      const current = counter.getAttribute(keyCounterName);
+      const rule = new RegExp(command, "gi");
+      const classe = current?.replace(rule, "").trim();
+      counter.setAttribute(keyCounterName, `${classe}`);
+      return classe?.split(" ").slice(-1)[0];
+    };
+
+    const play = (classe: string, target: HTMLDivElement) => {
+      target.style.animationPlayState = "pause";
       updateCurrentPosition(() => {
-        setAnimateClass("");
+        target.classList.add(classe);
+        target.style.animationPlayState = "running";
+        setAnimateClass(classe);
       });
     };
 
-    left.onPlay(() => {
+    const stop = (command: string) => {
+      const last = removeLastCommand(command);
+      target.style.animationPlayState = "paused";
+      updateCurrentPosition(() => {
+        setAnimateClass("");
+        if (last)
+          setTimeout(() => {
+            target.style.animationPlayState = "running";
+            setAnimateClass(last ? posArrows[last] : "");
+          });
+      });
+    };
+
+    left.onPlay((e) => {
+      addLastCommand(e.key);
       play(styles.char_run_left, target);
     });
     left.onStop((e) => {
-      console.log(e);
-      stop();
+      stop(e.key);
     });
     //
-    right.onStop(() => {
-      stop();
+    right.onStop((e) => {
+      stop(e.key);
     });
 
-    right.onPlay(() => {
+    right.onPlay((e) => {
+      addLastCommand(e.key);
       play(styles.char_run_right, target);
     });
   };
@@ -99,18 +99,11 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
       top: convertToNumber(top),
     };
   };
-  // calculate current pos
-  // useEffect(() => {
-  //   navigate[id] &&
-  //     (() => {
-  //       const check = restrictElementToStage();
-  //       check.valid && setPosition(navigate[id]);
-  //       !check.valid && moveFixed(id, { ...check });
-  //     })();
-  // }, [navigate[id]]);
 
   useEffect(() => {
-    elemRef.current && configureArrows(elemRef.current);
+    elemRef.current &&
+      elemCounter.current &&
+      configureArrows(elemRef.current, elemCounter.current);
   }, []);
 
   const updateCurrentPosition = (callbakck = Function()) => {
@@ -118,10 +111,10 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
       elemRef.current &&
         (() => {
           const obj = returnCurrentPosition(elemRef.current);
-          moveFixed(id, obj);
           setPosition(obj);
           setTimeout(() => {
             callbakck();
+            moveFixed(id, obj);
           });
         })();
     });
@@ -131,13 +124,16 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
   }, [startPosition]);
 
   return (
-    <div
-      style={{ ...(position ? position : startPosition) }}
-      className={`${styles.char} ${animateClass}`}
-      ref={elemRef}
-    >
-      {keyCount}
-    </div>
+    <>
+      <div ref={elemCounter}>x </div>
+      <div
+        style={{ ...(position ? position : startPosition) }}
+        className={`${styles.char} ${animateClass}`}
+        ref={elemRef}
+      >
+        {/* {keys} */}
+      </div>
+    </>
   );
 };
 
