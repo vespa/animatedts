@@ -60,7 +60,7 @@ function App() {
       <button onClick={() => moveRight("char2", goto)}>Move right 2</button>
       <Stage size={{ width: 800, height: 600 }}>
         <Character startPosition={{ left: "50%", top: "50%" }} id={char1} />
-        <Character startPosition={{ left: "10%", top: "10%" }} id={"char2"} />
+        {/* <Character startPosition={{ left: "10%", top: "10%" }} id={"char2"} />   */}
       </Stage>
     </div>
   );

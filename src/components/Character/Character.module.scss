@@ -6,6 +6,33 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition-property: top left;
-    // transition-duration: .2s;
+    transition: top left 1s;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    &_run {
+        &_left {
+            border: 2px solid;
+            animation-name: run_left;
+            animation-fill-mode: forwards
+        }
+        &_right {
+            border: 2px solid;
+            animation-name: run_right;
+          
+        }
+        
+    }
+    
+}
+
+@keyframes run_left {
+  100% {
+    left: 0%;    
+  }
+}
+
+@keyframes run_right {
+  100% {
+    left: 100%;    
+  }
 }
