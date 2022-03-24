@@ -4,11 +4,11 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "state";
 import { PositionProps } from "state/action-types";
-import styles from "./Character.module.scss";
+import styles from "./CharacterArrowNav.module.scss";
 
 import { useArrowControl } from "hooks/UseArrowControl";
 
-interface CharacterProps {
+interface CharacterArrowNavProps {
   id: string;
   startPosition?: {
     left: string | number;
@@ -25,7 +25,10 @@ const posArrows: {
   ArrowDown: styles.char_run_left,
 };
 
-export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
+export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
+  id,
+  startPosition,
+}) => {
   const keyCounterName = "data-key-counter";
   const { up, down, left, right } = useArrowControl();
   const [position, setPosition] = useState<PositionProps>();
@@ -159,4 +162,4 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
   );
 };
 
-export default Character;
+export default CharacterArrowNav;

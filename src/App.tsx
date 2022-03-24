@@ -3,7 +3,7 @@ import "./App.css";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "./state";
-import { Character, Stage } from "components";
+import { CharacterArrowNav, Stage } from "components";
 
 export const UseArrowControl = ({ action }: { action: () => void }) => {
   const [runAction, setRunAction] = useState(false);
@@ -59,8 +59,14 @@ function App() {
 
       <button onClick={() => moveRight("char2", goto)}>Move right 2</button>
       <Stage size={{ width: 800, height: 600 }}>
-        <Character startPosition={{ left: "50%", top: "50%" }} id={char1} />
-        <Character startPosition={{ left: "10%", top: "10%" }} id={"char2"} />
+        <CharacterArrowNav
+          startPosition={{ left: "50%", top: "50%" }}
+          id={char1}
+        />
+        <CharacterArrowNav
+          startPosition={{ left: "10%", top: "10%" }}
+          id={"char2"}
+        />
       </Stage>
     </div>
   );

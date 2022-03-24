@@ -1,2 +1,2 @@
-export * from "./Character";
+export * from "./CharacterArrowNav";
 export * from "./Stage";
