@@ -3,7 +3,7 @@
 ### Character
 
 #### Arrow Control 
- - [ ] Arrow Control engine (up, left, down, right)
+ - [x] Arrow Control engine (up, left, down, right)
  - [ ] Trigger Animation
     - [ ] According to direction
     - [ ] Reacting to event
