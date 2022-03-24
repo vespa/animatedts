@@ -4,6 +4,7 @@ export enum ActionNavigateType {
   LEFT = "left",
   RIGHT = "right",
   FIXED = "fixed",
+  REGISTER = "register",
 }
 
 export interface PositionProps {

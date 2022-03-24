@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "state";
 import { PositionProps } from "state/action-types";
-import { RootState } from "state/reducers";
 import styles from "./Character.module.scss";
 
 import { useArrowControl } from "hooks/UseArrowControl";
@@ -17,26 +16,30 @@ interface CharacterProps {
   };
 }
 
+const posArrows: {
+  [key: string]: string;
+} = {
+  ArrowRight: styles.char_run_right,
+  ArrowLeft: styles.char_run_left,
+  ArrowUp: styles.char_run_up,
+  ArrowDown: styles.char_run_left,
+};
+
 export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
+  const keyCounterName = "data-key-counter";
   const { up, down, left, right } = useArrowControl();
   const [position, setPosition] = useState<PositionProps>();
-  const [animateClass, setAnimateClass] = useState("");
+  const [animateClassH, setAnimateClassH] = useState("");
   const dispatch = useDispatch();
-  const { moveFixed } = bindActionCreators(navigateActionCreator, dispatch);
+  const { registerPosition } = bindActionCreators(
+    navigateActionCreator,
+    dispatch
+  );
   const elemRef = useRef(null);
   const elemCounter = useRef(null);
 
   const configureArrows = (target: HTMLDivElement, counter: HTMLDivElement) => {
-    const keyCounterName = "data-key-counter";
     counter.setAttribute(keyCounterName, "");
-    const posArrows: {
-      [key: string]: string;
-    } = {
-      ArrowRight: styles.char_run_right,
-      ArrowLeft: styles.char_run_left,
-      ArrowUp: styles.char_run_up,
-      ArrowDown: styles.char_run_left,
-    };
 
     const addLastCommand = (command: string) => {
       const current = counter.getAttribute(keyCounterName);
@@ -56,7 +59,7 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
       updateCurrentPosition(() => {
         target.classList.add(classe);
         target.style.animationPlayState = "running";
-        setAnimateClass(classe);
+        setAnimateClassH(classe);
       });
     };
 
@@ -64,15 +67,15 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
       const last = removeLastCommand(command);
       target.style.animationPlayState = "paused";
       updateCurrentPosition(() => {
-        setAnimateClass("");
+        setAnimateClassH("");
         if (last)
           setTimeout(() => {
             target.style.animationPlayState = "running";
-            setAnimateClass(last ? posArrows[last] : "");
+            setAnimateClassH(last ? posArrows[last] : "");
           });
       });
     };
-
+    // LEFT
     left.onPlay((e) => {
       addLastCommand(e.key);
       play(styles.char_run_left, target);
@@ -80,14 +83,32 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
     left.onStop((e) => {
       stop(e.key);
     });
-    //
+
+    // RIGHT
     right.onStop((e) => {
       stop(e.key);
     });
-
     right.onPlay((e) => {
       addLastCommand(e.key);
       play(styles.char_run_right, target);
+    });
+
+    // UP
+    up.onStop((e) => {
+      stop(e.key);
+    });
+    up.onPlay((e) => {
+      addLastCommand(e.key);
+      play(styles.char_run_up, target);
+    });
+
+    // DOWN
+    down.onStop((e) => {
+      stop(e.key);
+    });
+    down.onPlay((e) => {
+      addLastCommand(e.key);
+      play(styles.char_run_down, target);
     });
   };
   const returnCurrentPosition = (elem: HTMLDivElement) => {
@@ -114,7 +135,8 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
           setPosition(obj);
           setTimeout(() => {
             callbakck();
-            moveFixed(id, obj);
+            // register last position
+            registerPosition(id, obj);
           });
         })();
     });
@@ -128,7 +150,7 @@ export const Character: React.FC<CharacterProps> = ({ id, startPosition }) => {
       <div ref={elemCounter}>x </div>
       <div
         style={{ ...(position ? position : startPosition) }}
-        className={`${styles.char} ${animateClass}`}
+        className={`${styles.char} ${animateClassH}`}
         ref={elemRef}
       >
         {/* {keys} */}

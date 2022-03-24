@@ -59,6 +59,19 @@ export const moveFixed = (id: string, pos: ActionNavigateFixPayload) => {
   };
 };
 
+export const registerPosition = (id: string, pos: ActionNavigateFixPayload) => {
+  return (dispatch: Dispatch<ActionNavigateFix>) => {
+    dispatch({
+      id,
+      type: ActionNavigateType.REGISTER,
+      payload: {
+        left: pos.left,
+        top: pos.top,
+      },
+    });
+  };
+};
+
 
 
 

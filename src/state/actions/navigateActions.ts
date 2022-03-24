@@ -5,7 +5,8 @@ type ActionTypes =
   | ActionNavigateType.TOP
   | ActionNavigateType.LEFT
   | ActionNavigateType.RIGHT
-  | ActionNavigateType.FIXED;
+  | ActionNavigateType.FIXED
+  | ActionNavigateType.REGISTER;
 export interface ActionNavigate {
   id: string;
   type: ActionTypes;

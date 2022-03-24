@@ -41,6 +41,11 @@ const reducerNavigation = (
         ...state,
         [id]: payload,
       };
+    case ActionNavigateType.REGISTER:
+      return {
+        ...state,
+        [id]: payload,
+      };
     default:
       return state;
   }

@@ -20,6 +20,16 @@
             animation-name: run_right;
           
         }
+         &_up {
+            border: 2px solid;
+            animation-name: run_up;
+            animation-fill-mode: forwards
+        }
+        &_down {
+            border: 2px solid;
+            animation-name: run_down;
+          
+        }
         
     }
     
@@ -33,6 +43,19 @@
 
 @keyframes run_right {
   100% {
-    left: 100%;    
+    left: 103%;    
+  }
+}
+
+
+@keyframes run_up {
+  100% {
+    top: 0%;    
+  }
+}
+
+@keyframes run_down {
+  100% {
+    top: 103%;    
   }
 }
