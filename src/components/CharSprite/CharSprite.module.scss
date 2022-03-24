@@ -1,0 +1,9 @@
+.char  {
+    border: 1px solid;
+    overflow: hidden;
+    position: relative;
+    &__container {
+        animation: leftAnimation  2s  steps(2) infinite;
+        position: absolute;
+    }
+}
