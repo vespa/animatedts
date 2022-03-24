@@ -1,44 +1,10 @@
-import React, { useEffect, useState } from "react";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "./state";
 import { CharacterArrowNav, Stage } from "components";
 
-export const UseArrowControl = ({ action }: { action: () => void }) => {
-  const [runAction, setRunAction] = useState(false);
-  const startAction = (e: KeyboardEvent) => {
-    console.log(e);
-    setRunAction(true);
-  };
-
-  const stopAction = () => {
-    setRunAction(false);
-  };
-
-  useEffect(() => {
-    if (runAction) {
-      const id = setInterval(() => {
-        action();
-      }, 20);
-      return () => clearInterval(id);
-    }
-  }, [runAction]);
-
-  useEffect(() => {
-    window.addEventListener("keydown", startAction, true);
-    window.addEventListener("keyup", stopAction, true);
-    return () => {
-      window.removeEventListener("keydown", startAction, true);
-      window.removeEventListener("keyup", stopAction, true);
-    };
-  }, []);
-
-  return <></>;
-};
-
 function App() {
-  // const [timer, setTimer] = useState<NodeJS.Timer>();
   const goto = 10;
   const char1 = "char1";
   const dispatch = useDispatch();
@@ -46,8 +12,6 @@ function App() {
     navigateActionCreator,
     dispatch
   );
-
-  // let timeout: NodeJS.Timer;
 
   return (
     <div className="App">
