@@ -13,6 +13,12 @@ export interface ActionNavigate {
   payload: number;
 }
 
+export interface ActionNavigateRun {
+  id: string;
+  type: ActionTypes;
+  payload: number;
+}
+
 export interface ActionNavigateFixPayload {
   left: string | number;
   top: string | number;

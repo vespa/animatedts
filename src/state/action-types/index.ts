@@ -5,11 +5,13 @@ export enum ActionNavigateType {
   RIGHT = "right",
   FIXED = "fixed",
   REGISTER = "register",
+  RUNNING = "running",
 }
 
 export interface PositionProps {
   left: number;
   top: number;
+  running?: 1 | 0;
 }
 
 export interface CharGroupProps {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
+// import { RootState } from "state/reducers";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "state";
@@ -29,6 +29,9 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   id,
   startPosition,
 }) => {
+  const animationBaseTime = 1.5;
+  const [move, setMove] = useState("");
+  // const [timeToReachEgge, setTimeToReachEdge] = useState(animationBaseTiem);
   const keyCounterName = "data-key-counter";
   const { up, down, left, right } = useArrowControl();
   const [position, setPosition] = useState<PositionProps>();
@@ -38,14 +41,17 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
     navigateActionCreator,
     dispatch
   );
+  // const { stage, navigate } = useSelector((state: RootState) => state);
   const elemRef = useRef(null);
   const elemCounter = useRef(null);
 
+  
   const configureArrows = (target: HTMLDivElement, counter: HTMLDivElement) => {
     counter.setAttribute(keyCounterName, "");
 
     const addLastCommand = (command: string) => {
       const current = counter.getAttribute(keyCounterName);
+      setMove(command);
       counter.setAttribute(keyCounterName, `${current} ${command}`);
     };
 
@@ -144,19 +150,23 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
         })();
     });
   };
-  useEffect(() => {
-    updateCurrentPosition();
-  }, [startPosition]);
+
+  // useEffect(() => {
+  //   calcTimeToReachEdges();
+  // }, [navigate[id]]);
 
   return (
     <>
       <div ref={elemCounter}>x </div>
       <div
-        style={{ ...(position ? position : startPosition) }}
+        style={{
+          animationDuration: `${animationBaseTime}s`,
+          ...(position ? position : startPosition),
+        }}
         className={`${styles.char} ${animateClassH}`}
         ref={elemRef}
       >
-        {/* {keys} */}
+        {move}
       </div>
     </>
   );

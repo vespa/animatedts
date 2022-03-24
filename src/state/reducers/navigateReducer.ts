@@ -8,6 +8,7 @@ import { ActionNavigate } from "../actions";
 const initialState: PositionProps = {
   left: 0,
   top: 0,
+  running: 0,
 };
 
 const reducerNavigation = (

@@ -6,8 +6,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: top left 1s;
-    animation-duration: 2s;
     animation-fill-mode: forwards;
     &_run {
         &_left {

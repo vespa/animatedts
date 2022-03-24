@@ -27,10 +27,10 @@ function App() {
           startPosition={{ left: "50%", top: "50%" }}
           id={char1}
         />
-        <CharacterArrowNav
+        {/* <CharacterArrowNav
           startPosition={{ left: "10%", top: "10%" }}
           id={"char2"}
-        />
+        /> */}
       </Stage>
     </div>
   );
