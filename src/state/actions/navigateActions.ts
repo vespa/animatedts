@@ -1,12 +1,5 @@
-import { ActionNavigateType } from "../action-types";
+import { ActionTypes } from "../action-types";
 
-type ActionTypes =
-  | ActionNavigateType.BOTTOM
-  | ActionNavigateType.TOP
-  | ActionNavigateType.LEFT
-  | ActionNavigateType.RIGHT
-  | ActionNavigateType.FIXED
-  | ActionNavigateType.REGISTER;
 export interface ActionNavigate {
   id: string;
   type: ActionTypes;

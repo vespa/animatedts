@@ -8,6 +8,21 @@ export enum ActionNavigateType {
   RUNNING = "running",
 }
 
+
+export type ActionTypes =
+  | ActionNavigateType.BOTTOM
+  | ActionNavigateType.TOP
+  | ActionNavigateType.LEFT
+  | ActionNavigateType.RIGHT
+  | ActionNavigateType.FIXED
+  | ActionNavigateType.REGISTER;
+
+export type DirectionTypes =
+  | ActionNavigateType.BOTTOM
+  | ActionNavigateType.TOP
+  | ActionNavigateType.LEFT
+  | ActionNavigateType.RIGHT;
+
 export interface PositionProps {
   left: number;
   top: number;

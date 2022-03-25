@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./CharSprite.module.scss";
+
+import { DirectionTypes, ActionNavigateType } from "state/action-types";
+
 interface CharSpriteProps {
   /** default sprite position when animation is stopped */
   defaultPos?: number;
@@ -11,9 +14,22 @@ interface CharSpriteProps {
   height: number;
   /** src for sprite image */
   sprite: string;
-  /** src for sprite image */
+  /** selected sprites for animation when left vector is running */
   toLeft: number[];
+  /** selected sprites for animation when right vector is running */
+  toRight: number[];
+  /** selected sprites for animation when down vector is running */
+  toBottom: number[];
+  /** selected sprites for animation when up vector is running */
+  toTop: number[];
+  direction: DirectionTypes;
 }
+
+/**
+ * Component that manages sprite animations. The sprite should be a horizontal sheet with tiles each one with one of the frames of the animation.
+ * Each tile should have exactly the same width and the image should be perfectly centralized according to expected effect
+ *
+ * */
 
 export const CharSprite: React.FC<CharSpriteProps> = ({
   defaultPos = 0,
@@ -22,6 +38,10 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   height,
   sprite,
   toLeft = [],
+  toRight = [],
+  toBottom = [],
+  toTop = [],
+  direction,
 }) => {
   const defaultMainPos = -(defaultPos * width);
   let interval: NodeJS.Timeout;
@@ -29,10 +49,23 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   const [steps, setSteps] = useState<number[]>([]);
   const [current, setCurrent] = useState<number>(defaultMainPos);
 
-  const configureLeftAnimation = () => {
-    const stepsPos = toLeft.map((item: number) => -(item * width));
+  const configureAnimatioin = (values: number[]) => {
+    const stepsPos = values.map((item: number) => -(item * width));
     setSteps(stepsPos);
   };
+
+  const changeDirection = {
+    [ActionNavigateType.LEFT]: () => configureAnimatioin(toLeft),
+    [ActionNavigateType.RIGHT]: () => {
+      configureAnimatioin(toRight);
+    },
+    [ActionNavigateType.TOP]: () => configureAnimatioin(toTop),
+    [ActionNavigateType.BOTTOM]: () => configureAnimatioin(toBottom),
+  };
+
+  useEffect(() => {
+    changeDirection[direction]();
+  }, [direction]);
 
   useEffect(() => {
     const callNextSteps = (steps: number[], index = 0) => {
@@ -60,11 +93,8 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
       clearInterval(interval);
       setCurrent(defaultMainPos);
     };
-  }, [steps, running]);
+  }, [steps, running, direction]);
 
-  useEffect(() => {
-    configureLeftAnimation();
-  }, []);
   return (
     <div className={styles.char} style={{ width, height }}>
       <div
