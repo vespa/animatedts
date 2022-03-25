@@ -40,9 +40,11 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
         } else {
           callNextSteps(steps, 0);
         }
-      }, 100);
+      }, 60);
     };
     running && callNextSteps(steps);
+    !running && clearInterval(interval);
+    return () => clearInterval(interval);
   }, [steps, running]);
 
   useEffect(() => {
