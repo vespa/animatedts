@@ -55,12 +55,12 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   };
 
   const changeDirection = {
-    [ActionNavigateType.LEFT]: () => configureAnimatioin(toLeft),
-    [ActionNavigateType.RIGHT]: () => {
+    [ActionNavigateType.ArrowLeft]: () => configureAnimatioin(toLeft),
+    [ActionNavigateType.ArrowRight]: () => {
       configureAnimatioin(toRight);
     },
-    [ActionNavigateType.TOP]: () => configureAnimatioin(toTop),
-    [ActionNavigateType.BOTTOM]: () => configureAnimatioin(toBottom),
+    [ActionNavigateType.ArrowUp]: () => configureAnimatioin(toTop),
+    [ActionNavigateType.ArrowDown]: () => configureAnimatioin(toBottom),
   };
 
   useEffect(() => {

@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof CharSprite> = (args) => (
 
 export const charSprite = Template.bind({});
 charSprite.args = {
-  direction: ActionNavigateType.TOP,
+  direction: ActionNavigateType.ArrowUp,
   running: true,
   defaultPos: 5,
   width: 73,

@@ -1,27 +1,26 @@
 export enum ActionNavigateType {
-  TOP = "up",
-  BOTTOM = "down",
-  LEFT = "left",
-  RIGHT = "right",
+  ArrowUp = "up",
+  ArrowDown = "down",
+  ArrowLeft = "left",
+  ArrowRight = "right",
   FIXED = "fixed",
   REGISTER = "register",
   RUNNING = "running",
 }
 
-
 export type ActionTypes =
-  | ActionNavigateType.BOTTOM
-  | ActionNavigateType.TOP
-  | ActionNavigateType.LEFT
-  | ActionNavigateType.RIGHT
+  | ActionNavigateType.ArrowDown
+  | ActionNavigateType.ArrowUp
+  | ActionNavigateType.ArrowLeft
+  | ActionNavigateType.ArrowRight
   | ActionNavigateType.FIXED
   | ActionNavigateType.REGISTER;
 
 export type DirectionTypes =
-  | ActionNavigateType.BOTTOM
-  | ActionNavigateType.TOP
-  | ActionNavigateType.LEFT
-  | ActionNavigateType.RIGHT;
+  | ActionNavigateType.ArrowDown
+  | ActionNavigateType.ArrowUp
+  | ActionNavigateType.ArrowLeft
+  | ActionNavigateType.ArrowRight;
 
 export interface PositionProps {
   left: number;

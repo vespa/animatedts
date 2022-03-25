@@ -3,10 +3,10 @@ import { useState } from "react";
 export const useArrowControl = () => {
   const [keys, setKeys] = useState(0);
   enum ArrowProps {
-    UP = "ArrowUp",
-    DOWN = "ArrowDown",
-    RIGHT = "ArrowRight",
-    LEFT = "ArrowLeft",
+    ArrowUp = "ArrowUp",
+    ArrowDown = "ArrowDown",
+    ArrowRight = "ArrowRight",
+    ArrowLeft = "ArrowLeft",
   }
   const wrap =
     (action: (e: KeyboardEvent) => void, key: ArrowProps) =>
@@ -30,10 +30,10 @@ export const useArrowControl = () => {
   };
 
   return {
-    up: commandFatory(ArrowProps.UP),
-    down: commandFatory(ArrowProps.DOWN),
-    left: commandFatory(ArrowProps.LEFT),
-    right: commandFatory(ArrowProps.RIGHT),
+    up: commandFatory(ArrowProps.ArrowUp),
+    down: commandFatory(ArrowProps.ArrowRight),
+    left: commandFatory(ArrowProps.ArrowLeft),
+    right: commandFatory(ArrowProps.ArrowRight),
     keys,
     setKeys,
   };

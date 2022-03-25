@@ -17,22 +17,22 @@ const reducerNavigation = (
 ) => {
   const getCurrent = state[id] || initialState;
   switch (type) {
-    case ActionNavigateType.TOP:
+    case ActionNavigateType.ArrowUp:
       return {
         ...state,
         [id]: { ...getCurrent, top: getCurrent.top - payload },
       };
-    case ActionNavigateType.BOTTOM:
+    case ActionNavigateType.ArrowDown:
       return {
         ...state,
         [id]: { ...getCurrent, top: getCurrent.top + payload },
       };
-    case ActionNavigateType.LEFT:
+    case ActionNavigateType.ArrowLeft:
       return {
         ...state,
         [id]: { ...getCurrent, left: getCurrent.left - payload },
       };
-    case ActionNavigateType.RIGHT:
+    case ActionNavigateType.ArrowRight:
       return {
         ...state,
         [id]: { ...getCurrent, left: getCurrent.left + payload },
