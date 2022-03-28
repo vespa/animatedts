@@ -3,31 +3,23 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "state";
-import { PositionProps } from "state/action-types";
+import { PositionProps, CharacterArrowNavProps } from "state/action-types";
 import styles from "./CharacterArrowNav.module.scss";
 
 import { useArrowControl } from "hooks/UseArrowControl";
-
-interface CharacterArrowNavProps {
-  id: string;
-  startPosition?: {
-    left: string | number;
-    top: string | number;
-  };
-}
-
 const posArrows: {
   [key: string]: string;
 } = {
   ArrowRight: styles.char_run_right,
   ArrowLeft: styles.char_run_left,
   ArrowUp: styles.char_run_up,
-  ArrowDown: styles.char_run_left,
+  ArrowDown: styles.char_run_down,
 };
 
 export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   id,
   startPosition,
+  children,
 }) => {
   const animationBaseTime = 1.5;
   const [move, setMove] = useState("");
@@ -45,13 +37,13 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   const elemRef = useRef(null);
   const elemCounter = useRef(null);
 
-  
   const configureArrows = (target: HTMLDivElement, counter: HTMLDivElement) => {
     counter.setAttribute(keyCounterName, "");
 
     const addLastCommand = (command: string) => {
       const current = counter.getAttribute(keyCounterName);
       setMove(command);
+      console.log(command);
       counter.setAttribute(keyCounterName, `${current} ${command}`);
     };
 
@@ -157,7 +149,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
 
   return (
     <>
-      <div ref={elemCounter}>x </div>
+      <div ref={elemCounter}></div>
       <div
         style={{
           animationDuration: `${animationBaseTime}s`,
@@ -166,7 +158,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
         className={`${styles.char} ${animateClassH}`}
         ref={elemRef}
       >
-        {move}
+        {move} {children}
       </div>
     </>
   );

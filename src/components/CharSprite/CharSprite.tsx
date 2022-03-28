@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./CharSprite.module.scss";
+import { PositionProps, CharacterArrowNavProps } from "state/action-types";
 
 import { DirectionTypes, ActionNavigateType } from "state/action-types";
-
+import { CharacterArrowNav } from "components/CharacterArrowNav";
 interface CharSpriteProps {
   /** default sprite position when animation is stopped */
   defaultPos?: number;
@@ -107,4 +108,14 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   );
 };
 
+interface CharSpriteNavProps extends CharSpriteProps, CharacterArrowNavProps {}
+
+export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
+  const { id, startPosition, ...rest } = props;
+  return (
+    <CharacterArrowNav id={id} startPosition={startPosition}>
+      <CharSprite {...rest} />
+    </CharacterArrowNav>
+  );
+};
 export default CharSprite;

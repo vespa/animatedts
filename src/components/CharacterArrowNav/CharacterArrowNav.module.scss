@@ -21,10 +21,9 @@
          &_up {
             border: 2px solid;
             animation-name: run_up;
-            animation-fill-mode: forwards
         }
         &_down {
-            border: 2px solid;
+            border: 2px solid green;
             animation-name: run_down;
           
         }

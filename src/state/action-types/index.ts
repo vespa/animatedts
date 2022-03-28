@@ -41,3 +41,12 @@ export interface StateStageProps {
 export enum ActionStageType {
   SET_STAGE_SIZE = "set_stage_size",
 }
+
+
+export interface CharacterArrowNavProps {
+  id: string;
+  startPosition?: {
+    left: string | number;
+    top: string | number;
+  };
+}
