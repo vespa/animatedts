@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./CharSprite.module.scss";
-import { PositionProps, CharacterArrowNavProps } from "state/action-types";
+import { CharacterArrowNavProps } from "state/action-types";
 
 import { DirectionTypes, ActionNavigateType } from "state/action-types";
 import { CharacterArrowNav } from "components/CharacterArrowNav";
@@ -111,10 +111,17 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
 interface CharSpriteNavProps extends CharSpriteProps, CharacterArrowNavProps {}
 
 export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
+  const [direction, setDirection] = useState<DirectionTypes>(
+    ActionNavigateType.ArrowLeft
+  );
   const { id, startPosition, ...rest } = props;
   return (
-    <CharacterArrowNav id={id} startPosition={startPosition}>
-      <CharSprite {...rest} />
+    <CharacterArrowNav
+      id={id}
+      startPosition={startPosition}
+      setDirection={setDirection}
+    >
+      <CharSprite {...rest} direction={direction} />
     </CharacterArrowNav>
   );
 };

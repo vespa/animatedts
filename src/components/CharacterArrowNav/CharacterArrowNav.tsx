@@ -3,7 +3,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "state";
-import { PositionProps, CharacterArrowNavProps } from "state/action-types";
+import {
+  PositionProps,
+  CharacterArrowNavProps,
+  DirectionTypes,
+} from "state/action-types";
 import styles from "./CharacterArrowNav.module.scss";
 
 import { useArrowControl } from "hooks/UseArrowControl";
@@ -20,9 +24,9 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   id,
   startPosition,
   children,
+  setDirection = () => false,
 }) => {
   const animationBaseTime = 1.5;
-  const [move, setMove] = useState("");
   // const [timeToReachEgge, setTimeToReachEdge] = useState(animationBaseTiem);
   const keyCounterName = "data-key-counter";
   const { up, down, left, right } = useArrowControl();
@@ -40,9 +44,9 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   const configureArrows = (target: HTMLDivElement, counter: HTMLDivElement) => {
     counter.setAttribute(keyCounterName, "");
 
-    const addLastCommand = (command: string) => {
+    const addLastCommand = (command: DirectionTypes) => {
       const current = counter.getAttribute(keyCounterName);
-      setMove(command);
+      setDirection(command);
       console.log(command);
       counter.setAttribute(keyCounterName, `${current} ${command}`);
     };
@@ -78,7 +82,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
     };
     // LEFT
     left.onPlay((e) => {
-      addLastCommand(e.key);
+      addLastCommand(e.key as DirectionTypes);
       play(styles.char_run_left, target);
     });
     left.onStop((e) => {
@@ -90,7 +94,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
       stop(e.key);
     });
     right.onPlay((e) => {
-      addLastCommand(e.key);
+      addLastCommand(e.key as DirectionTypes);
       play(styles.char_run_right, target);
     });
 
@@ -99,7 +103,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
       stop(e.key);
     });
     up.onPlay((e) => {
-      addLastCommand(e.key);
+      addLastCommand(e.key as DirectionTypes);
       play(styles.char_run_up, target);
     });
 
@@ -108,7 +112,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
       stop(e.key);
     });
     down.onPlay((e) => {
-      addLastCommand(e.key);
+      addLastCommand(e.key as DirectionTypes);
       play(styles.char_run_down, target);
     });
   };
@@ -158,7 +162,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
         className={`${styles.char} ${animateClassH}`}
         ref={elemRef}
       >
-        {move} {children}
+        {children}
       </div>
     </>
   );

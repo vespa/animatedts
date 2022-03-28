@@ -1,8 +1,8 @@
 export enum ActionNavigateType {
-  ArrowUp = "up",
-  ArrowDown = "down",
-  ArrowLeft = "left",
-  ArrowRight = "right",
+  ArrowUp = "ArrowUp",
+  ArrowDown = "ArrowDown",
+  ArrowLeft = "ArrowLeft",
+  ArrowRight = "ArrowRight",
   FIXED = "fixed",
   REGISTER = "register",
   RUNNING = "running",
@@ -42,9 +42,9 @@ export enum ActionStageType {
   SET_STAGE_SIZE = "set_stage_size",
 }
 
-
 export interface CharacterArrowNavProps {
   id: string;
+  setDirection?: (command: DirectionTypes) => void;
   startPosition?: {
     left: string | number;
     top: string | number;
