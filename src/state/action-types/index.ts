@@ -45,6 +45,7 @@ export enum ActionStageType {
 export interface CharacterArrowNavProps {
   id: string;
   setDirection?: (command: DirectionTypes) => void;
+  setRunning?: (command: boolean) => void;
   startPosition?: {
     left: string | number;
     top: string | number;

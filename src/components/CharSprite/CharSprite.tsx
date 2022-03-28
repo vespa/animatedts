@@ -114,14 +114,16 @@ export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
   const [direction, setDirection] = useState<DirectionTypes>(
     ActionNavigateType.ArrowLeft
   );
+  const [running, setRunning] = useState<boolean>(false);
   const { id, startPosition, ...rest } = props;
   return (
     <CharacterArrowNav
       id={id}
       startPosition={startPosition}
       setDirection={setDirection}
+      setRunning={setRunning}
     >
-      <CharSprite {...rest} direction={direction} />
+      <CharSprite {...rest} direction={direction} running={running} />
     </CharacterArrowNav>
   );
 };

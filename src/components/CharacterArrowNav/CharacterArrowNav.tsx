@@ -25,6 +25,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   startPosition,
   children,
   setDirection = () => false,
+  setRunning = () => false,
 }) => {
   const animationBaseTime = 1.5;
   // const [timeToReachEgge, setTimeToReachEdge] = useState(animationBaseTiem);
@@ -47,7 +48,6 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
     const addLastCommand = (command: DirectionTypes) => {
       const current = counter.getAttribute(keyCounterName);
       setDirection(command);
-      console.log(command);
       counter.setAttribute(keyCounterName, `${current} ${command}`);
     };
 
@@ -65,6 +65,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
         target.classList.add(classe);
         target.style.animationPlayState = "running";
         setAnimateClassH(classe);
+        setRunning(true);
       });
     };
 
@@ -73,11 +74,15 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
       target.style.animationPlayState = "paused";
       updateCurrentPosition(() => {
         setAnimateClassH("");
-        if (last)
+        if (last) {
           setTimeout(() => {
             target.style.animationPlayState = "running";
             setAnimateClassH(last ? posArrows[last] : "");
+            setDirection(last as DirectionTypes);
           });
+        } else {
+          setRunning(false);
+        }
       });
     };
     // LEFT
@@ -127,6 +132,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   };
 
   useEffect(() => {
+    setRunning(false);
     elemRef.current &&
       elemCounter.current &&
       configureArrows(elemRef.current, elemCounter.current);

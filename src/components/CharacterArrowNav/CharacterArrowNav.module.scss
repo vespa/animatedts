@@ -1,5 +1,4 @@
 .char {
-    background-color: red;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -7,21 +6,16 @@
     animation-fill-mode: forwards;
     &_run {
         &_left {
-            border: 2px solid;
             animation-name: run_left;
-            animation-fill-mode: forwards
         }
         &_right {
-            border: 2px solid;
             animation-name: run_right;
           
         }
          &_up {
-            border: 2px solid;
             animation-name: run_up;
         }
         &_down {
-            border: 2px solid green;
             animation-name: run_down;
           
         }
