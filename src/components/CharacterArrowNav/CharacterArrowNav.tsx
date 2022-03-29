@@ -28,7 +28,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   setDirection = () => false,
   setRunning = () => false,
 }) => {
-  const animationBaseTime = 3;
+  const animationBaseTime = 1.5;
   const keyCounterName = "data-key-counter";
   const { up, down, left, right } = useArrowControl();
   const [position, setPosition] = useState<PositionProps>();
@@ -50,7 +50,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
     target: HTMLDivElement,
     key: DirectionTypes
   ) => {
-    const { left, top, right } = window.getComputedStyle(target);
+    const { left, top } = window.getComputedStyle(target);
     const timeFixer = (vector: string, val: number) => {
       const time =
         ((convertToNumber(vector) * 100) / val / 100) * animationBaseTime;
@@ -59,16 +59,15 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
     const bottomCalc = convertToNumber(
       `${stage.height - convertToNumber(top)}`
     );
+    const rightCalc = convertToNumber(`${stage.width - convertToNumber(left)}`);
     const timeToReach: {
       [key: string]: number;
     } = {
       [ActionNavigateType.ArrowLeft]: timeFixer(left, stage.width),
-      [ActionNavigateType.ArrowRight]: timeFixer(right, stage.width),
+      [ActionNavigateType.ArrowRight]: timeFixer(`${rightCalc}`, stage.width),
       [ActionNavigateType.ArrowUp]: timeFixer(top, stage.height),
       [ActionNavigateType.ArrowDown]: timeFixer(`${bottomCalc}`, stage.height),
     };
-    console.log(timeToReach);
-    // console.log(stage.height, stage.height + convertToNumber(bottom));
     setToEdge(timeToReach[key]);
   };
   const configureArrows = (target: HTMLDivElement, counter: HTMLDivElement) => {
@@ -93,10 +92,10 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
       target: HTMLDivElement,
       key: DirectionTypes
     ) => {
-      calcDistanceFromEdge(target, key);
       addLastCommand(key);
       target.style.animationPlayState = "pause";
       updateCurrentPosition(() => {
+        calcDistanceFromEdge(target, key);
         target.classList.add(classe);
         target.style.animationPlayState = "running";
         setAnimateClassH(classe);

@@ -4,6 +4,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     animation-fill-mode: forwards;
+    animation-timing-function: linear;
     &_run {
         &_left {
             animation-name: run_left;
@@ -26,25 +27,25 @@
 
 @keyframes run_left {
   100% {
-    left: 0%;    
+    left: 5%;    
   }
 }
 
 @keyframes run_right {
   100% {
-    left: 100%;    
+    left: 95%;    
   }
 }
 
 
 @keyframes run_up {
   100% {
-    top: 0%;    
+    top: 5%;    
   }
 }
 
 @keyframes run_down {
   100% {
-    top: 103%;    
+    top: 95%;    
   }
 }
