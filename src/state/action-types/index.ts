@@ -36,6 +36,7 @@ export interface CharGroupProps {
 export interface StateStageProps {
   width: number;
   height: number;
+  loaded?: boolean;
 }
 
 export enum ActionStageType {

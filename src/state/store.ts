@@ -7,7 +7,7 @@ export const store = createStore(
   {},
   compose(
     applyMiddleware(thunk),
-    // /* eslint-disable  @typescript-eslint/no-explicit-any */
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
       (window as any).__REDUX_DEVTOOLS_EXTENSION__()
   )

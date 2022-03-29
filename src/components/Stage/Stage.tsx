@@ -16,7 +16,10 @@ export const Stage: React.FC<StageProps> = ({ children, size }) => {
   const { setStageSize } = bindActionCreators(stageActionCreator, dispatch);
 
   useEffect(() => {
-    setStageSize(size);
+    setStageSize({
+      ...size,
+      loaded: true,
+    });
   }, []);
   return (
     <div className={styles.stage} style={{ ...stageProps }}>

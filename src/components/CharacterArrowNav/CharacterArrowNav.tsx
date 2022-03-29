@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-// import { RootState } from "state/reducers";
-import { useDispatch } from "react-redux";
+import { RootState } from "state/reducers";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "state";
 import {
   PositionProps,
   CharacterArrowNavProps,
   DirectionTypes,
+  ActionNavigateType,
 } from "state/action-types";
 import styles from "./CharacterArrowNav.module.scss";
 
@@ -27,21 +28,49 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   setDirection = () => false,
   setRunning = () => false,
 }) => {
-  const animationBaseTime = 1.5;
-  // const [timeToReachEgge, setTimeToReachEdge] = useState(animationBaseTiem);
+  const animationBaseTime = 3;
   const keyCounterName = "data-key-counter";
   const { up, down, left, right } = useArrowControl();
   const [position, setPosition] = useState<PositionProps>();
   const [animateClassH, setAnimateClassH] = useState("");
+  const [toEdge, setToEdge] = useState(animationBaseTime / 2);
   const dispatch = useDispatch();
   const { registerPosition } = bindActionCreators(
     navigateActionCreator,
     dispatch
   );
-  // const { stage, navigate } = useSelector((state: RootState) => state);
+  const { stage } = useSelector((state: RootState) => state);
   const elemRef = useRef(null);
   const elemCounter = useRef(null);
 
+  const convertToNumber = (n: string): number =>
+    Number(n.replace(/[a-zA-Z]/gi, ""));
+
+  const calcDistanceFromEdge = (
+    target: HTMLDivElement,
+    key: DirectionTypes
+  ) => {
+    const { left, top, right } = window.getComputedStyle(target);
+    const timeFixer = (vector: string, val: number) => {
+      const time =
+        ((convertToNumber(vector) * 100) / val / 100) * animationBaseTime;
+      return time > 0 ? time : animationBaseTime;
+    };
+    const bottomCalc = convertToNumber(
+      `${stage.height - convertToNumber(top)}`
+    );
+    const timeToReach: {
+      [key: string]: number;
+    } = {
+      [ActionNavigateType.ArrowLeft]: timeFixer(left, stage.width),
+      [ActionNavigateType.ArrowRight]: timeFixer(right, stage.width),
+      [ActionNavigateType.ArrowUp]: timeFixer(top, stage.height),
+      [ActionNavigateType.ArrowDown]: timeFixer(`${bottomCalc}`, stage.height),
+    };
+    console.log(timeToReach);
+    // console.log(stage.height, stage.height + convertToNumber(bottom));
+    setToEdge(timeToReach[key]);
+  };
   const configureArrows = (target: HTMLDivElement, counter: HTMLDivElement) => {
     counter.setAttribute(keyCounterName, "");
 
@@ -59,7 +88,13 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
       return classe?.split(" ").slice(-1)[0];
     };
 
-    const play = (classe: string, target: HTMLDivElement) => {
+    const play = (
+      classe: string,
+      target: HTMLDivElement,
+      key: DirectionTypes
+    ) => {
+      calcDistanceFromEdge(target, key);
+      addLastCommand(key);
       target.style.animationPlayState = "pause";
       updateCurrentPosition(() => {
         target.classList.add(classe);
@@ -85,46 +120,32 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
         }
       });
     };
+
     // LEFT
-    left.onPlay((e) => {
-      addLastCommand(e.key as DirectionTypes);
-      play(styles.char_run_left, target);
-    });
-    left.onStop((e) => {
-      stop(e.key);
-    });
+    left.onPlay((e) =>
+      play(styles.char_run_left, target, e.key as DirectionTypes)
+    );
+    left.onStop((e) => stop(e.key));
 
     // RIGHT
-    right.onStop((e) => {
-      stop(e.key);
-    });
-    right.onPlay((e) => {
-      addLastCommand(e.key as DirectionTypes);
-      play(styles.char_run_right, target);
-    });
+    right.onStop((e) => stop(e.key));
+    right.onPlay((e) =>
+      play(styles.char_run_right, target, e.key as DirectionTypes)
+    );
 
     // UP
-    up.onStop((e) => {
-      stop(e.key);
-    });
-    up.onPlay((e) => {
-      addLastCommand(e.key as DirectionTypes);
-      play(styles.char_run_up, target);
-    });
+    up.onStop((e) => stop(e.key));
+    up.onPlay((e) => play(styles.char_run_up, target, e.key as DirectionTypes));
 
     // DOWN
-    down.onStop((e) => {
-      stop(e.key);
-    });
-    down.onPlay((e) => {
-      addLastCommand(e.key as DirectionTypes);
-      play(styles.char_run_down, target);
-    });
+    down.onStop((e) => stop(e.key));
+    down.onPlay((e) =>
+      play(styles.char_run_down, target, e.key as DirectionTypes)
+    );
   };
   const returnCurrentPosition = (elem: HTMLDivElement) => {
     const { left, top } = window.getComputedStyle(elem);
-    const convertToNumber = (n: string): number =>
-      Number(n.replace(/[a-zA-Z]/gi, ""));
+
     return {
       left: convertToNumber(left),
       top: convertToNumber(top),
@@ -133,10 +154,11 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
 
   useEffect(() => {
     setRunning(false);
-    elemRef.current &&
+    stage.loaded &&
+      elemRef.current &&
       elemCounter.current &&
       configureArrows(elemRef.current, elemCounter.current);
-  }, []);
+  }, [stage]);
 
   const updateCurrentPosition = (callbakck = Function()) => {
     setTimeout(() => {
@@ -162,7 +184,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
       <div ref={elemCounter}></div>
       <div
         style={{
-          animationDuration: `${animationBaseTime}s`,
+          animationDuration: `${toEdge}s`,
           ...(position ? position : startPosition),
         }}
         className={`${styles.char} ${animateClassH}`}
