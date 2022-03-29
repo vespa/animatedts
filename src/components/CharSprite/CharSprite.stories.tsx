@@ -3,8 +3,6 @@ import { CharSprite, CharSpriteArrowNav } from "./CharSprite";
 import mainSprite from "static/sprites/jetpack_sprite.png";
 import { ActionNavigateType } from "state/action-types";
 import { Stage } from "components/Stage";
-import { Provider } from "react-redux";
-import { store } from "state";
 
 export default {
   title: "Example/CharSprite",
@@ -17,7 +15,7 @@ const Template: ComponentStory<typeof CharSprite> = (args) => (
 
 export const charSprite = Template.bind({});
 charSprite.args = {
-  direction: ActionNavigateType.ArrowUp,
+  direction: ActionNavigateType.ArrowDown,
   running: true,
   defaultPos: 5,
   width: 73,
@@ -30,17 +28,15 @@ charSprite.args = {
 };
 
 const TemplateNAV: ComponentStory<typeof CharSpriteArrowNav> = (args) => (
-  <Provider store={store}>
-    <Stage size={{ width: 800, height: 200 }}>
-      <CharSpriteArrowNav {...args} />
-    </Stage>
-  </Provider>
+  <Stage size={{ width: 800, height: 200 }}>
+    click on this stage and controll with the arrows
+    <CharSpriteArrowNav {...args} />
+  </Stage>
 );
 export const charSpriteArrowNav = TemplateNAV.bind({});
 
 charSpriteArrowNav.args = {
   id: "test",
-  direction: ActionNavigateType.ArrowUp,
   running: true,
   defaultPos: 5,
   width: 73,
