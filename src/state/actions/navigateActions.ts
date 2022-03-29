@@ -13,8 +13,8 @@ export interface ActionNavigateRun {
 }
 
 export interface ActionNavigateFixPayload {
-  left: string | number;
-  top: string | number;
+  left: number;
+  top: number;
 }
 export interface ActionNavigateFix {
   id: string;

@@ -122,6 +122,7 @@ export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
       startPosition={startPosition}
       setDirection={setDirection}
       setRunning={setRunning}
+      running={running}
     >
       <CharSprite {...rest} direction={direction} running={running} />
     </CharacterArrowNav>
