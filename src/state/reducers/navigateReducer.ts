@@ -14,7 +14,7 @@ const initialState: PositionProps = {
 const reducerNavigation = (
   state: CharGroupProps = {},
   { id, type, payload }: ActionNavigate
-) => {
+): CharGroupProps => {
   const getCurrent = state[id] || initialState;
   switch (type) {
     case ActionNavigateType.ArrowUp:
@@ -37,15 +37,16 @@ const reducerNavigation = (
         ...state,
         [id]: { ...getCurrent, left: getCurrent.left + payload },
       };
-    case ActionNavigateType.FIXED:
+
+    case ActionNavigateType.REGISTER_LEFT:
       return {
         ...state,
-        [id]: payload,
+        [id]: { ...getCurrent, left: payload },
       };
-    case ActionNavigateType.REGISTER:
+    case ActionNavigateType.REGISTER_TOP:
       return {
         ...state,
-        [id]: payload,
+        [id]: { ...getCurrent, top: payload },
       };
     default:
       return state;

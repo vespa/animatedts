@@ -5,6 +5,8 @@ export enum ActionNavigateType {
   ArrowRight = "ArrowRight",
   FIXED = "fixed",
   REGISTER = "register",
+  REGISTER_TOP = "register_TOP",
+  REGISTER_LEFT = "register_LEFT",
   RUNNING = "running",
 }
 
@@ -13,8 +15,9 @@ export type ActionTypes =
   | ActionNavigateType.ArrowUp
   | ActionNavigateType.ArrowLeft
   | ActionNavigateType.ArrowRight
-  | ActionNavigateType.FIXED
-  | ActionNavigateType.REGISTER;
+  | ActionNavigateType.REGISTER
+  | ActionNavigateType.REGISTER_LEFT
+  | ActionNavigateType.REGISTER_TOP;
 
 export type DirectionTypes =
   | ActionNavigateType.ArrowDown
@@ -31,6 +34,7 @@ export interface PositionProps {
 export interface CharGroupProps {
   [key: string]: PositionProps;
 }
+[];
 
 // STAGE
 export interface StateStageProps {
@@ -45,6 +49,7 @@ export enum ActionStageType {
 
 export interface CharacterArrowNavProps {
   id: string;
+  running?: boolean;
   setDirection?: (command: DirectionTypes) => void;
   setRunning?: (command: boolean) => void;
   startPosition?: {
