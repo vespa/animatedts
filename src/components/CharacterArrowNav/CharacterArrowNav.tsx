@@ -121,27 +121,40 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
           const obj = returnCurrentPosition(elemRef.current);
           setTimeout(() => {
             callbakck();
-            // register last position
             registerPosition(id, obj);
           });
         })();
     });
   };
   let myInterval: NodeJS.Timer;
+  const movementControls = (target: HTMLDivElement) => {
+    const mov = 15;
+    const limitH = stage.width
+    const limitV = stage.height
+    const currentNav = navigate[id]
+    const calcH = () => {
+      const pos = convertToNumber(target.style.left)
+      console.log(pos)      
+      return pos <= 0 ? mov : pos <= stage.width ?   mov : -mov
+    }
+   
+    const commands = {
+      [ActionNavigateType.ArrowLeft]: () => moveLeft(id,  calcH()),
+      [ActionNavigateType.ArrowUp]: () => moveTop(id, mov),
+      [ActionNavigateType.ArrowDown]: () => moveDown(id, mov),
+      [ActionNavigateType.ArrowRight]: () => moveRight(id,  calcH()),
+    };
+    key && commands[key]();
+  }
   useEffect(() => {
     clearInterval(myInterval);
+    
     running &&
       navigate[id] &&
+      elemRef.current &&
       (() => {
         myInterval = setInterval(() => {
-          const mov = 15;
-          const commands = {
-            [ActionNavigateType.ArrowLeft]: () => moveLeft(id, mov),
-            [ActionNavigateType.ArrowUp]: () => moveTop(id, mov),
-            [ActionNavigateType.ArrowDown]: () => moveDown(id, mov),
-            [ActionNavigateType.ArrowRight]: () => moveRight(id, mov),
-          };
-          key && commands[key]();
+          elemRef.current && movementControls(elemRef.current);
         }, 60);
       })();
 
@@ -150,7 +163,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
 
   return (
     <>
-      <div ref={elemCounter}> </div>
+      <div ref={elemCounter}> {navigate[id] && navigate[id].left} </div>
       <div
         style={{
           ...(navigate[id] ? navigate[id] : startPosition),
