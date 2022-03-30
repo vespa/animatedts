@@ -150,7 +150,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
 
   return (
     <>
-      <div ref={elemCounter}>{key}</div>
+      <div ref={elemCounter}> </div>
       <div
         style={{
           ...(navigate[id] ? navigate[id] : startPosition),
