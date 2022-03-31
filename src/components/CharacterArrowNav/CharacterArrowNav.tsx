@@ -129,26 +129,20 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   let myInterval: NodeJS.Timer;
   const movementControls = (target: HTMLDivElement) => {
     const mov = 15;
-    const limitH = stage.width
-    const limitV = stage.height
-    const currentNav = navigate[id]
-    const calcH = () => {
-      const pos = convertToNumber(target.style.left)
-      console.log(pos)      
-      return pos <= 0 ? mov : pos <= stage.width ?   mov : -mov
-    }
-   
+    const posX = convertToNumber(target.style.left)
+    const posY = convertToNumber(target.style.top)
     const commands = {
-      [ActionNavigateType.ArrowLeft]: () => moveLeft(id,  calcH()),
-      [ActionNavigateType.ArrowUp]: () => moveTop(id, mov),
-      [ActionNavigateType.ArrowDown]: () => moveDown(id, mov),
-      [ActionNavigateType.ArrowRight]: () => moveRight(id,  calcH()),
+      [ActionNavigateType.ArrowLeft]: () => moveLeft(id, posX <= 0 ? -mov : mov),
+      [ActionNavigateType.ArrowRight]: () => moveRight(id, posX <= stage.width ? mov : -mov),
+      [ActionNavigateType.ArrowUp]: () => moveTop(id, posY <= 0 ? -mov : mov),
+      [ActionNavigateType.ArrowDown]: () => moveDown(id, posY <= stage.height ? mov : -mov),
+
     };
     key && commands[key]();
   }
   useEffect(() => {
     clearInterval(myInterval);
-    
+
     running &&
       navigate[id] &&
       elemRef.current &&
@@ -163,7 +157,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
 
   return (
     <>
-      <div ref={elemCounter}> {navigate[id] && navigate[id].left} </div>
+      <div ref={elemCounter}></div>
       <div
         style={{
           ...(navigate[id] ? navigate[id] : startPosition),
