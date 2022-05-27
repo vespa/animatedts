@@ -3,7 +3,7 @@ import styles from "./AnimatedSprite.module.scss";
 import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
 interface AnimatedSpriteProps {
   /** fixed position on stage */
-  postion?: {
+  position?: {
     left: string | number;
     top: string | number;
   };
@@ -48,7 +48,7 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
   toTop = [],
   staticElementMoves = [],
   direction = ActionNavigateTypeKeys.STATIC_MOVES,
-  postion = {}
+  position = {}
 }) => {
   const defaultMainPos = -(defaultPos * width);
   let interval: NodeJS.Timeout;
@@ -104,7 +104,7 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
   }, [steps, running, direction]);
 
   return (
-    <div className={styles.char} style={{ width, height, ...postion }}>
+    <div className={styles.char} style={{ width, height, ...position }}>
       <div
         className={styles.char__container}
         style={{ left: current ?? defaultMainPos }}

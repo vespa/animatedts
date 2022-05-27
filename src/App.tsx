@@ -2,7 +2,7 @@ import "./App.css";
 // import { useDispatch } from "react-redux";
 // import { bindActionCreators } from "redux";
 // import { navigateActionCreator } from "./state";
-import { navigateActionCreator } from "state";
+// import { navigateActionCreator } from "state";
 import { Stage, AnimatedSpriteNavByArrows, AnimatedSprite } from "components";
 import mainSprite from "static/sprites/jetpack_sprite.png";
 import { useSelector } from "react-redux";
@@ -28,7 +28,7 @@ const MainChar = () => (
 
 const StaticChar = () => (
   <AnimatedSprite
-    postion={{ left: "0%", top: "10%" }}
+    position={{ left: "0%", top: "10%" }}
     sprite={mainSprite}
     defaultPos={5}
     height={120}

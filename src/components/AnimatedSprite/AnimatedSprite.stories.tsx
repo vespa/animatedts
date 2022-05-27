@@ -12,8 +12,8 @@ const Template: ComponentStory<typeof AnimatedSprite> = (args) => (
   <AnimatedSprite {...args} />
 );
 
-export const charSprite = Template.bind({});
-charSprite.args = {
+export const animatedSprite = Template.bind({});
+animatedSprite.args = {
   direction: ActionNavigateTypeKeys.ARROW_DOWN,
   running: true,
   defaultPos: 5,

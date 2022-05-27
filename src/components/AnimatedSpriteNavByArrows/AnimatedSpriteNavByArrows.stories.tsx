@@ -14,10 +14,10 @@ const TemplateNAV: ComponentStory<typeof AnimatedSpriteNavByArrows> = (args) => 
     <AnimatedSpriteNavByArrows {...args} />
   </Stage>
 );
-export const charSpriteArrowNav = TemplateNAV.bind({});
+export const animatedSpriteNavByArrows = TemplateNAV.bind({});
 
-charSpriteArrowNav.parameters = { controls: { exclude: /^direction*/ } };
-charSpriteArrowNav.args = {
+animatedSpriteNavByArrows.parameters = { controls: { exclude: /^direction*/ } };
+animatedSpriteNavByArrows.args = {
   id: "test",
   running: true,
   defaultPos: 5,
