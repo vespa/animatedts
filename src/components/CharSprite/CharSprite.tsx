@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./CharSprite.module.scss";
 import { CharacterArrowNavProps } from "state/action-types";
 
-import { DirectionTypes, ActionNavigateType } from "state/action-types";
+import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
 import { CharacterArrowNav } from "components/CharacterArrowNav";
 interface CharSpriteProps {
   /** default sprite position when animation is stopped */
@@ -56,12 +56,12 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   };
 
   const changeDirection = {
-    [ActionNavigateType.ARROW_LEFT]: () => configureAnimatioin(toLeft),
-    [ActionNavigateType.ARROW_RIGHT]: () => {
+    [ActionNavigateTypeKeys.ARROW_LEFT]: () => configureAnimatioin(toLeft),
+    [ActionNavigateTypeKeys.ARROW_RIGHT]: () => {
       configureAnimatioin(toRight);
     },
-    [ActionNavigateType.ARROW_UP]: () => configureAnimatioin(toTop),
-    [ActionNavigateType.ARROW_DOWN]: () => configureAnimatioin(toBottom),
+    [ActionNavigateTypeKeys.ARROW_UP]: () => configureAnimatioin(toTop),
+    [ActionNavigateTypeKeys.ARROW_DOWN]: () => configureAnimatioin(toBottom),
   };
 
   useEffect(() => {
@@ -112,7 +112,7 @@ interface CharSpriteNavProps extends CharSpriteProps, CharacterArrowNavProps { }
 
 export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
   const [direction, setDirection] = useState<DirectionTypes>(
-    ActionNavigateType.ARROW_LEFT
+    ActionNavigateTypeKeys.ARROW_LEFT
   );
   const [running, setRunning] = useState<boolean>(false);
   const { id, startPosition, ...rest } = props;

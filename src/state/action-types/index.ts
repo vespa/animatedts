@@ -1,10 +1,4 @@
-export enum ActionNavigateType {
-  // key names, do not change
-  ARROW_UP = "ArrowUp",
-  ARROW_DOWN = "ArrowDown",
-  ARROW_LEFT = "ArrowLeft",
-  ARROW_RIGHT = "ArrowRight",
-  // extra statuses
+export enum ActionNavigateTypeSetPos {
   FIXED = "fixed",
   REGISTER = "register",
   REGISTER_TOP = "register_TOP",
@@ -12,11 +6,15 @@ export enum ActionNavigateType {
   RUNNING = "running",
 }
 
-export type DirectionTypes =
-  | ActionNavigateType.ARROW_DOWN
-  | ActionNavigateType.ARROW_UP
-  | ActionNavigateType.ARROW_LEFT
-  | ActionNavigateType.ARROW_RIGHT;
+export enum ActionNavigateTypeKeys {
+  // key names, do not change
+  ARROW_UP = "ArrowUp",
+  ARROW_DOWN = "ArrowDown",
+  ARROW_LEFT = "ArrowLeft",
+  ARROW_RIGHT = "ArrowRight",
+}
+// convert enum ActionNavigateTypeKeys into type
+export type DirectionTypes = `${ActionNavigateTypeKeys}`
 
 export interface PositionProps {
   left: number;

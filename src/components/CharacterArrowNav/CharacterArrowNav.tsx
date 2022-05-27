@@ -6,7 +6,7 @@ import { navigateActionCreator } from "state";
 import {
   CharacterArrowNavProps,
   DirectionTypes,
-  ActionNavigateType,
+  ActionNavigateTypeKeys,
 } from "state/action-types";
 import styles from "./CharacterArrowNav.module.scss";
 
@@ -22,7 +22,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
 }) => {
   const keyCounterName = "data-key-counter";
   const { up, down, left, right } = useArrowControl();
-  const [key, setKey] = useState<DirectionTypes>(ActionNavigateType.ARROW_UP);
+  const [key, setKey] = useState<DirectionTypes>(ActionNavigateTypeKeys.ARROW_UP);
 
   const dispatch = useDispatch();
   const { registerPosition, moveLeft, moveDown, moveRight, moveTop } =
@@ -132,10 +132,10 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
     const posX = convertToNumber(target.style.left)
     const posY = convertToNumber(target.style.top)
     const commands = {
-      [ActionNavigateType.ARROW_LEFT]: () => moveLeft(id, posX <= 0 ? -mov : mov),
-      [ActionNavigateType.ARROW_RIGHT]: () => moveRight(id, posX <= stage.width ? mov : -mov),
-      [ActionNavigateType.ARROW_UP]: () => moveTop(id, posY <= 0 ? -mov : mov),
-      [ActionNavigateType.ARROW_DOWN]: () => moveDown(id, posY <= stage.height ? mov : -mov),
+      [ActionNavigateTypeKeys.ARROW_LEFT]: () => moveLeft(id, posX <= 0 ? -mov : mov),
+      [ActionNavigateTypeKeys.ARROW_RIGHT]: () => moveRight(id, posX <= stage.width ? mov : -mov),
+      [ActionNavigateTypeKeys.ARROW_UP]: () => moveTop(id, posY <= 0 ? -mov : mov),
+      [ActionNavigateTypeKeys.ARROW_DOWN]: () => moveDown(id, posY <= stage.height ? mov : -mov),
 
     };
     key && commands[key]();

@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { CharSprite, CharSpriteArrowNav } from "./CharSprite";
 import mainSprite from "static/sprites/jetpack_sprite.png";
-import { ActionNavigateType } from "state/action-types";
+import { ActionNavigateTypeKeys } from "state/action-types";
 import { Stage } from "components/Stage";
 
 export default {
@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof CharSprite> = (args) => (
 
 export const charSprite = Template.bind({});
 charSprite.args = {
-  direction: ActionNavigateType.ARROW_DOWN,
+  direction: ActionNavigateTypeKeys.ARROW_DOWN,
   running: true,
   defaultPos: 5,
   width: 73,
