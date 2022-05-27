@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./CharSprite.module.scss";
-import { CharacterArrowNavProps } from "state/action-types";
 
 import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
-import { CharacterArrowNav } from "components/CharacterArrowNav";
 interface CharSpriteProps {
   /** default sprite position when animation is stopped */
   defaultPos?: number;
@@ -24,7 +22,7 @@ interface CharSpriteProps {
   /** selected sprites for animation when up vector is running */
   toTop: number[];
   /** defines with set of sprites should be triggered */
-  direction: DirectionTypes;
+  direction?: DirectionTypes;
 }
 
 /**
@@ -43,7 +41,7 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   toRight = [],
   toBottom = [],
   toTop = [],
-  direction,
+  direction = ActionNavigateTypeKeys.ARROW_DOWN,
 }) => {
   const defaultMainPos = -(defaultPos * width);
   let interval: NodeJS.Timeout;
@@ -109,24 +107,4 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   );
 };
 
-interface CharSpriteNavProps extends CharSpriteProps, CharacterArrowNavProps { }
-
-export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
-  const [direction, setDirection] = useState<DirectionTypes>(
-    ActionNavigateTypeKeys.ARROW_LEFT
-  );
-  const [running, setRunning] = useState<boolean>(false);
-  const { id, startPosition, ...rest } = props;
-  return (
-    <CharacterArrowNav
-      id={id}
-      startPosition={startPosition}
-      setDirection={setDirection}
-      setRunning={setRunning}
-      running={running}
-    >
-      <CharSprite {...rest} direction={direction} running={running} />
-    </CharacterArrowNav>
-  );
-};
 export default CharSprite;
