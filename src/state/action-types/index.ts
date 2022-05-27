@@ -1,3 +1,5 @@
+import { ReactChildren, ReactNode } from "react";
+
 export enum ActionNavigateTypeSetPos {
   FIXED = "fixed",
   REGISTER = "register",
@@ -43,6 +45,7 @@ export enum ActionStageType {
 export interface NavArrowsProps {
   id: string;
   running?: boolean;
+  children?: ReactNode;
   setDirection?: (command: DirectionTypes) => void;
   setRunning?: (command: boolean) => void;
   startPosition?: {
