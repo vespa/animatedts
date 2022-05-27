@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { navigateActionCreator } from "state";
 import {
-  CharacterArrowNavProps,
+  NavArrowsProps,
   DirectionTypes,
   ActionNavigateTypeKeys,
 } from "state/action-types";
-import styles from "./CharacterArrowNav.module.scss";
+import styles from "./NavArrows.module.scss";
 
 import { useArrowControl } from "hooks/UseArrowControl";
 
-export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
+export const NavArrows: React.FC<NavArrowsProps> = ({
   id,
   startPosition,
   children,
@@ -51,8 +51,6 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
     };
 
     const play = (
-      classe: string,
-      target: HTMLDivElement,
       key: DirectionTypes
     ) => {
       addLastCommand(key);
@@ -76,24 +74,24 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
 
     // LEFT
     left.onPlay((e) =>
-      play(styles.char_run_left, target, e.key as DirectionTypes)
+      play(e.key as DirectionTypes)
     );
     left.onStop((e) => stop(e.key));
 
     // RIGHT
     right.onStop((e) => stop(e.key));
     right.onPlay((e) =>
-      play(styles.char_run_right, target, e.key as DirectionTypes)
+      play(e.key as DirectionTypes)
     );
 
     // UP
     up.onStop((e) => stop(e.key));
-    up.onPlay((e) => play(styles.char_run_up, target, e.key as DirectionTypes));
+    up.onPlay((e) => play(e.key as DirectionTypes));
 
     // DOWN
     down.onStop((e) => stop(e.key));
     down.onPlay((e) =>
-      play(styles.char_run_down, target, e.key as DirectionTypes)
+      play(e.key as DirectionTypes)
     );
   };
   const returnCurrentPosition = (elem: HTMLDivElement) => {
@@ -136,7 +134,6 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
       [ActionNavigateTypeKeys.ARROW_RIGHT]: () => moveRight(id, posX <= stage.width ? mov : -mov),
       [ActionNavigateTypeKeys.ARROW_UP]: () => moveTop(id, posY <= 0 ? -mov : mov),
       [ActionNavigateTypeKeys.ARROW_DOWN]: () => moveDown(id, posY <= stage.height ? mov : -mov),
-
     };
     key && commands[key]();
   }
@@ -171,4 +168,4 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
   );
 };
 
-export default CharacterArrowNav;
+export default NavArrows;

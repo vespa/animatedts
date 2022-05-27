@@ -1,17 +1,17 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { CharSpriteArrowNav } from "components";
+import { CharSpriteNavByArrows } from "components/CharSpriteNavByArrows";
 import mainSprite from "static/sprites/jetpack_sprite.png";
 import { Stage } from "components/Stage";
 
 export default {
-  title: "Example/CharSpriteArrowNav",
-  component: CharSpriteArrowNav,
-} as ComponentMeta<typeof CharSpriteArrowNav>;
+  title: "Example/CharSpriteNavByArrows",
+  component: CharSpriteNavByArrows,
+} as ComponentMeta<typeof CharSpriteNavByArrows>;
 
-const TemplateNAV: ComponentStory<typeof CharSpriteArrowNav> = (args) => (
+const TemplateNAV: ComponentStory<typeof CharSpriteNavByArrows> = (args) => (
   <Stage size={{ width: 800, height: 200 }}>
     click on this stage and controll with the arrows
-    <CharSpriteArrowNav {...args} />
+    <CharSpriteNavByArrows {...args} />
   </Stage>
 );
 export const charSpriteArrowNav = TemplateNAV.bind({});

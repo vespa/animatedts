@@ -2,18 +2,28 @@ import "./App.css";
 // import { useDispatch } from "react-redux";
 // import { bindActionCreators } from "redux";
 // import { navigateActionCreator } from "./state";
-import { Stage, CharSpriteArrowNav } from "components";
+import { Stage, CharSpriteNavByArrows } from "components";
 import mainSprite from "static/sprites/jetpack_sprite.png";
 
-function App() {
-  // const goto = 100;
-  const char1 = "char1";
-  // const dispatch = useDispatch();
-  // const { moveTop, moveDown, moveLeft, moveRight } = bindActionCreators(
-  //   navigateActionCreator,
-  //   dispatch
-  // );
 
+const MainChar = () => (
+  <CharSpriteNavByArrows
+    startPosition={{ left: "50%", top: "50%" }}
+    id={"MainChar"}
+    running={true}
+    defaultPos={5}
+    width={73}
+    height={120}
+    toRight={[8, 9]}
+    toLeft={[10, 11]}
+    toBottom={[6, 5, 7]}
+    toTop={[13, 12, 14]}
+    sprite={mainSprite}
+  />
+)
+
+
+function App() {
   return (
     <div className="App">
       {/* <button onClick={() => moveTop(char1, goto)}>Move top</button>
@@ -24,20 +34,8 @@ function App() {
 
       <button onClick={() => moveRight("char2", goto)}>Move right 2</button> */}
       <Stage size={{ width: 800, height: 600 }}>
-        <CharSpriteArrowNav
-          startPosition={{ left: "50%", top: "50%" }}
-          id={char1}
-          running={true}
-          defaultPos={5}
-          width={73}
-          height={120}
-          toRight={[8, 9]}
-          toLeft={[10, 11]}
-          toBottom={[6, 5, 7]}
-          toTop={[13, 12, 14]}
-          sprite={mainSprite}
-        />
 
+        <MainChar />
       </Stage>
     </div>
   );

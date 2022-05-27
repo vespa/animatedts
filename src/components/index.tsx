@@ -1,4 +1,4 @@
 export * from "./CharSprite";
-export * from "./CharSpriteArrowNav";
+export * from "./CharSpriteNavByArrows";
 
 export * from "./Stage";

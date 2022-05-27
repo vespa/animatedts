@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { CharacterArrowNavProps } from "state/action-types";
+import { NavArrowsProps } from "state/action-types";
 
 import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
-import { CharacterArrowNav } from "components/CharacterArrowNav";
+import { NavArrows } from "components/NavArrows";
 import CharSprite from "components/CharSprite/CharSprite";
 
 interface CharSpriteProps {
@@ -34,16 +34,16 @@ interface CharSpriteProps {
  *
  * */
 
-interface CharSpriteNavProps extends CharSpriteProps, CharacterArrowNavProps { }
+interface CharSpriteNavProps extends CharSpriteProps, NavArrowsProps { }
 
-export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
+export const CharSpriteNavByArrows: React.FC<CharSpriteNavProps> = (props) => {
   const [direction, setDirection] = useState<DirectionTypes>(
     ActionNavigateTypeKeys.ARROW_LEFT
   );
   const [running, setRunning] = useState<boolean>(false);
   const { id, startPosition, ...rest } = props;
   return (
-    <CharacterArrowNav
+    <NavArrows
       id={id}
       startPosition={startPosition}
       setDirection={setDirection}
@@ -51,7 +51,7 @@ export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
       running={running}
     >
       <CharSprite {...rest} direction={direction} running={running} />
-    </CharacterArrowNav>
+    </NavArrows>
   );
 };
-export default CharSpriteArrowNav;
+export default CharSpriteNavByArrows;

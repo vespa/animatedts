@@ -38,7 +38,7 @@ export enum ActionStageType {
   SET_STAGE_SIZE = "set_stage_size",
 }
 
-export interface CharacterArrowNavProps {
+export interface NavArrowsProps {
   id: string;
   running?: boolean;
   setDirection?: (command: DirectionTypes) => void;
