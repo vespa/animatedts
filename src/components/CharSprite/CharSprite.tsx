@@ -60,7 +60,7 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
     [ActionNavigateType.ArrowRight]: () => {
       configureAnimatioin(toRight);
     },
-    [ActionNavigateType.ArrowUp]: () => configureAnimatioin(toTop),
+    [ActionNavigateType.ARROW_UP]: () => configureAnimatioin(toTop),
     [ActionNavigateType.ArrowDown]: () => configureAnimatioin(toBottom),
   };
 
@@ -108,7 +108,7 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   );
 };
 
-interface CharSpriteNavProps extends CharSpriteProps, CharacterArrowNavProps {}
+interface CharSpriteNavProps extends CharSpriteProps, CharacterArrowNavProps { }
 
 export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
   const [direction, setDirection] = useState<DirectionTypes>(

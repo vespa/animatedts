@@ -17,7 +17,7 @@ const reducerNavigation = (
 ): CharGroupProps => {
   const getCurrent = state[id] || initialState;
   switch (type) {
-    case ActionNavigateType.ArrowUp:
+    case ActionNavigateType.ARROW_UP:
       return {
         ...state,
         [id]: { ...getCurrent, top: getCurrent.top - payload },

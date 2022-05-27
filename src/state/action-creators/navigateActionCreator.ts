@@ -10,7 +10,7 @@ export const moveTop = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
       id,
-      type: ActionNavigateType.ArrowUp,
+      type: ActionNavigateType.ARROW_UP,
       payload: pos,
     });
   };

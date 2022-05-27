@@ -1,8 +1,10 @@
 export enum ActionNavigateType {
-  ArrowUp = "ArrowUp",
+  // key names, do not change
+  ARROW_UP = "ArrowUp",
   ArrowDown = "ArrowDown",
   ArrowLeft = "ArrowLeft",
   ArrowRight = "ArrowRight",
+  // extra statuses
   FIXED = "fixed",
   REGISTER = "register",
   REGISTER_TOP = "register_TOP",
@@ -12,7 +14,7 @@ export enum ActionNavigateType {
 
 export type DirectionTypes =
   | ActionNavigateType.ArrowDown
-  | ActionNavigateType.ArrowUp
+  | ActionNavigateType.ARROW_UP
   | ActionNavigateType.ArrowLeft
   | ActionNavigateType.ArrowRight;
 

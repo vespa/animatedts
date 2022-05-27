@@ -22,7 +22,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
 }) => {
   const keyCounterName = "data-key-counter";
   const { up, down, left, right } = useArrowControl();
-  const [key, setKey] = useState<DirectionTypes>(ActionNavigateType.ArrowUp);
+  const [key, setKey] = useState<DirectionTypes>(ActionNavigateType.ARROW_UP);
 
   const dispatch = useDispatch();
   const { registerPosition, moveLeft, moveDown, moveRight, moveTop } =
@@ -134,7 +134,7 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
     const commands = {
       [ActionNavigateType.ArrowLeft]: () => moveLeft(id, posX <= 0 ? -mov : mov),
       [ActionNavigateType.ArrowRight]: () => moveRight(id, posX <= stage.width ? mov : -mov),
-      [ActionNavigateType.ArrowUp]: () => moveTop(id, posY <= 0 ? -mov : mov),
+      [ActionNavigateType.ARROW_UP]: () => moveTop(id, posY <= 0 ? -mov : mov),
       [ActionNavigateType.ArrowDown]: () => moveDown(id, posY <= stage.height ? mov : -mov),
 
     };
