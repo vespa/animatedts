@@ -20,7 +20,7 @@ export const moveDown = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
       id,
-      type: ActionNavigateType.ArrowDown,
+      type: ActionNavigateType.ARROW_DOWN,
       payload: pos,
     });
   };
@@ -30,7 +30,7 @@ export const moveRight = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
       id,
-      type: ActionNavigateType.ArrowRight,
+      type: ActionNavigateType.ARROW_RIGHT,
       payload: pos,
     });
   };
@@ -40,7 +40,7 @@ export const moveLeft = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
       id,
-      type: ActionNavigateType.ArrowLeft,
+      type: ActionNavigateType.ARROW_LEFT,
       payload: pos,
     });
   };

@@ -1,9 +1,9 @@
 export enum ActionNavigateType {
   // key names, do not change
   ARROW_UP = "ArrowUp",
-  ArrowDown = "ArrowDown",
-  ArrowLeft = "ArrowLeft",
-  ArrowRight = "ArrowRight",
+  ARROW_DOWN = "ArrowDown",
+  ARROW_LEFT = "ArrowLeft",
+  ARROW_RIGHT = "ArrowRight",
   // extra statuses
   FIXED = "fixed",
   REGISTER = "register",
@@ -13,10 +13,10 @@ export enum ActionNavigateType {
 }
 
 export type DirectionTypes =
-  | ActionNavigateType.ArrowDown
+  | ActionNavigateType.ARROW_DOWN
   | ActionNavigateType.ARROW_UP
-  | ActionNavigateType.ArrowLeft
-  | ActionNavigateType.ArrowRight;
+  | ActionNavigateType.ARROW_LEFT
+  | ActionNavigateType.ARROW_RIGHT;
 
 export interface PositionProps {
   left: number;

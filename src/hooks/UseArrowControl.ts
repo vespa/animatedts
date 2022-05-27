@@ -26,9 +26,9 @@ export const useArrowControl = () => {
 
   return {
     up: commandFatory(ActionNavigateType.ARROW_UP),
-    down: commandFatory(ActionNavigateType.ArrowDown),
-    left: commandFatory(ActionNavigateType.ArrowLeft),
-    right: commandFatory(ActionNavigateType.ArrowRight),
+    down: commandFatory(ActionNavigateType.ARROW_DOWN),
+    left: commandFatory(ActionNavigateType.ARROW_LEFT),
+    right: commandFatory(ActionNavigateType.ARROW_RIGHT),
     keys,
     setKeys,
   };

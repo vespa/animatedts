@@ -132,10 +132,10 @@ export const CharacterArrowNav: React.FC<CharacterArrowNavProps> = ({
     const posX = convertToNumber(target.style.left)
     const posY = convertToNumber(target.style.top)
     const commands = {
-      [ActionNavigateType.ArrowLeft]: () => moveLeft(id, posX <= 0 ? -mov : mov),
-      [ActionNavigateType.ArrowRight]: () => moveRight(id, posX <= stage.width ? mov : -mov),
+      [ActionNavigateType.ARROW_LEFT]: () => moveLeft(id, posX <= 0 ? -mov : mov),
+      [ActionNavigateType.ARROW_RIGHT]: () => moveRight(id, posX <= stage.width ? mov : -mov),
       [ActionNavigateType.ARROW_UP]: () => moveTop(id, posY <= 0 ? -mov : mov),
-      [ActionNavigateType.ArrowDown]: () => moveDown(id, posY <= stage.height ? mov : -mov),
+      [ActionNavigateType.ARROW_DOWN]: () => moveDown(id, posY <= stage.height ? mov : -mov),
 
     };
     key && commands[key]();

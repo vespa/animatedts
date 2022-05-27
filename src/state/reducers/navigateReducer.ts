@@ -22,17 +22,17 @@ const reducerNavigation = (
         ...state,
         [id]: { ...getCurrent, top: getCurrent.top - payload },
       };
-    case ActionNavigateType.ArrowDown:
+    case ActionNavigateType.ARROW_DOWN:
       return {
         ...state,
         [id]: { ...getCurrent, top: getCurrent.top + payload },
       };
-    case ActionNavigateType.ArrowLeft:
+    case ActionNavigateType.ARROW_LEFT:
       return {
         ...state,
         [id]: { ...getCurrent, left: getCurrent.left - payload },
       };
-    case ActionNavigateType.ArrowRight:
+    case ActionNavigateType.ARROW_RIGHT:
       return {
         ...state,
         [id]: { ...getCurrent, left: getCurrent.left + payload },

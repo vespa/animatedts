@@ -56,12 +56,12 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   };
 
   const changeDirection = {
-    [ActionNavigateType.ArrowLeft]: () => configureAnimatioin(toLeft),
-    [ActionNavigateType.ArrowRight]: () => {
+    [ActionNavigateType.ARROW_LEFT]: () => configureAnimatioin(toLeft),
+    [ActionNavigateType.ARROW_RIGHT]: () => {
       configureAnimatioin(toRight);
     },
     [ActionNavigateType.ARROW_UP]: () => configureAnimatioin(toTop),
-    [ActionNavigateType.ArrowDown]: () => configureAnimatioin(toBottom),
+    [ActionNavigateType.ARROW_DOWN]: () => configureAnimatioin(toBottom),
   };
 
   useEffect(() => {
@@ -112,7 +112,7 @@ interface CharSpriteNavProps extends CharSpriteProps, CharacterArrowNavProps { }
 
 export const CharSpriteArrowNav: React.FC<CharSpriteNavProps> = (props) => {
   const [direction, setDirection] = useState<DirectionTypes>(
-    ActionNavigateType.ArrowLeft
+    ActionNavigateType.ARROW_LEFT
   );
   const [running, setRunning] = useState<boolean>(false);
   const { id, startPosition, ...rest } = props;
