@@ -1,15 +1,15 @@
-import { ActionNavigateTypeKeys } from '../state/action-types'
+import { DirectionsNavigateKeys } from '../state/action-types'
 
 export const useArrowControl = () => {
   const wrap =
-    (action: (e: KeyboardEvent) => void, key: ActionNavigateTypeKeys) =>
+    (action: (e: KeyboardEvent) => void, key: DirectionsNavigateKeys) =>
     (e: KeyboardEvent) => {
       if (e.code === key && !e.repeat) {
         action(e);
       }
     };
 
-  const commandFactory = (key: ActionNavigateTypeKeys) => {
+  const commandFactory = (key: DirectionsNavigateKeys) => {
     return {
       onPlay: (action: (e: KeyboardEvent) => void) => {
         const command = wrap(action, key);
@@ -23,9 +23,9 @@ export const useArrowControl = () => {
   };
 
   return {
-    up: commandFactory(ActionNavigateTypeKeys.ARROW_UP),
-    down: commandFactory(ActionNavigateTypeKeys.ARROW_DOWN),
-    left: commandFactory(ActionNavigateTypeKeys.ARROW_LEFT),
-    right: commandFactory(ActionNavigateTypeKeys.ARROW_RIGHT)
+    up: commandFactory(DirectionsNavigateKeys.UP),
+    down: commandFactory(DirectionsNavigateKeys.DOWN),
+    left: commandFactory(DirectionsNavigateKeys.LEFT),
+    right: commandFactory(DirectionsNavigateKeys.RIGHT)
   };
 };

@@ -1,5 +1,5 @@
 import {
-  ActionNavigateTypeKeys,
+  DirectionsNavigateKeys,
   ActionNavigateTypeSetPos,
   PositionProps,
   CharGroupProps,
@@ -18,22 +18,22 @@ const reducerNavigation = (
 ): CharGroupProps => {
   const getCurrent = state[id] || initialState;
   switch (type) {
-    case ActionNavigateTypeKeys.ARROW_UP:
+    case DirectionsNavigateKeys.UP:
       return {
         ...state,
         [id]: { ...getCurrent, top: getCurrent.top - payload },
       };
-    case ActionNavigateTypeKeys.ARROW_DOWN:
+    case DirectionsNavigateKeys.DOWN:
       return {
         ...state,
         [id]: { ...getCurrent, top: getCurrent.top + payload },
       };
-    case ActionNavigateTypeKeys.ARROW_LEFT:
+    case DirectionsNavigateKeys.LEFT:
       return {
         ...state,
         [id]: { ...getCurrent, left: getCurrent.left - payload },
       };
-    case ActionNavigateTypeKeys.ARROW_RIGHT:
+    case DirectionsNavigateKeys.RIGHT:
       return {
         ...state,
         [id]: { ...getCurrent, left: getCurrent.left + payload },

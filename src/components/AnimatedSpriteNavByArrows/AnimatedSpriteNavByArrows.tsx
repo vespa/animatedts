@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavArrowsProps } from "state/action-types";
-import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
+import { DirectionTypes, DirectionsNavigateKeys } from "state/action-types";
 import { NavArrows } from "components/NavArrows";
 import AnimatedSprite from "components/AnimatedSprite/AnimatedSprite";
 
@@ -37,7 +37,7 @@ interface AnimatedSpriteNavProps extends AnimatedSpriteProps, NavArrowsProps { }
 
 export const AnimatedSpriteNavByArrows: React.FC<AnimatedSpriteNavProps> = (props) => {
   const [direction, setDirection] = useState<DirectionTypes>(
-    ActionNavigateTypeKeys.ARROW_LEFT
+    DirectionsNavigateKeys.LEFT
   );
   const [running, setRunning] = useState<boolean>(false);
   const { id, startPosition, ...rest } = props;

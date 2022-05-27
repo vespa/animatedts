@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { AnimatedSprite } from "components/AnimatedSprite";
 import mainSprite from "static/sprites/jetpack_sprite.png";
-import { ActionNavigateTypeKeys } from "state/action-types";
+import { DirectionsNavigateKeys } from "state/action-types";
 
 export default {
   title: "Example/AnimatedSprite",
@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof AnimatedSprite> = (args) => (
 
 export const animatedSprite = Template.bind({});
 animatedSprite.args = {
-  direction: ActionNavigateTypeKeys.ARROW_DOWN,
+  direction: DirectionsNavigateKeys.DOWN,
   running: true,
   defaultPos: 5,
   width: 73,

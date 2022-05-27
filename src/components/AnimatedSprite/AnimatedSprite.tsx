@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./AnimatedSprite.module.scss";
-import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
+import { DirectionTypes, DirectionsNavigateKeys } from "state/action-types";
 interface AnimatedSpriteProps {
   /** fixed position on stage */
   position?: {
@@ -47,7 +47,7 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
   toBottom = [],
   toTop = [],
   staticElementMoves = [],
-  direction = ActionNavigateTypeKeys.STATIC_MOVES,
+  direction = DirectionsNavigateKeys.STATIC_MOVES,
   position = {}
 }) => {
   const defaultMainPos = -(defaultPos * width);
@@ -62,13 +62,13 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
   };
 
   const changeDirection = {
-    [ActionNavigateTypeKeys.ARROW_LEFT]: () => configureAnimation(toLeft),
-    [ActionNavigateTypeKeys.ARROW_RIGHT]: () => {
+    [DirectionsNavigateKeys.LEFT]: () => configureAnimation(toLeft),
+    [DirectionsNavigateKeys.RIGHT]: () => {
       configureAnimation(toRight);
     },
-    [ActionNavigateTypeKeys.ARROW_UP]: () => configureAnimation(toTop),
-    [ActionNavigateTypeKeys.ARROW_DOWN]: () => configureAnimation(toBottom),
-    [ActionNavigateTypeKeys.STATIC_MOVES]: () => configureAnimation(staticElementMoves),
+    [DirectionsNavigateKeys.UP]: () => configureAnimation(toTop),
+    [DirectionsNavigateKeys.DOWN]: () => configureAnimation(toBottom),
+    [DirectionsNavigateKeys.STATIC_MOVES]: () => configureAnimation(staticElementMoves),
   };
 
   useEffect(() => {

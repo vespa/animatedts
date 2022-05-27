@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { ActionNavigateTypeKeys, ActionNavigateTypeSetPos } from "../action-types";
+import { DirectionsNavigateKeys, ActionNavigateTypeSetPos } from "../action-types";
 import {
   ActionNavigate,
   ActionNavigateFixPayload,
@@ -9,7 +9,7 @@ export const moveTop = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
       id,
-      type: ActionNavigateTypeKeys.ARROW_UP,
+      type: DirectionsNavigateKeys.UP,
       payload: pos,
     });
   };
@@ -19,7 +19,7 @@ export const moveDown = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
       id,
-      type: ActionNavigateTypeKeys.ARROW_DOWN,
+      type: DirectionsNavigateKeys.DOWN,
       payload: pos,
     });
   };
@@ -29,7 +29,7 @@ export const moveRight = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
       id,
-      type: ActionNavigateTypeKeys.ARROW_RIGHT,
+      type: DirectionsNavigateKeys.RIGHT,
       payload: pos,
     });
   };
@@ -39,7 +39,7 @@ export const moveLeft = (id: string, pos: number) => {
   return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
       id,
-      type: ActionNavigateTypeKeys.ARROW_LEFT,
+      type: DirectionsNavigateKeys.LEFT,
       payload: pos,
     });
   };

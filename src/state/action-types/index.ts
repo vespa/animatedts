@@ -6,17 +6,17 @@ export enum ActionNavigateTypeSetPos {
   RUNNING = "running",
 }
 
-export enum ActionNavigateTypeKeys {
+export enum DirectionsNavigateKeys {
   // keyboard key names, do not change
-  ARROW_UP = "ArrowUp",
-  ARROW_DOWN = "ArrowDown",
-  ARROW_LEFT = "ArrowLeft",
-  ARROW_RIGHT = "ArrowRight",
+  UP = "ArrowUp",
+  DOWN = "ArrowDown",
+  LEFT = "ArrowLeft",
+  RIGHT = "ArrowRight",
   // Other movements
   STATIC_MOVES = 'static'
 }
-// convert enum ActionNavigateTypeKeys into type
-export type DirectionTypes = `${ActionNavigateTypeKeys}`
+// convert enum DirectionsNavigateKeys into type
+export type DirectionTypes = `${DirectionsNavigateKeys}`
 
 export interface PositionProps {
   left: number;
