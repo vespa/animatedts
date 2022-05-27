@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { ActionNavigateTypeKeys } from '../state/action-types'
 
 export const useArrowControl = () => {
-  const [keys, setKeys] = useState(0);
   const wrap =
     (action: (e: KeyboardEvent) => void, key: ActionNavigateTypeKeys) =>
     (e: KeyboardEvent) => {
@@ -11,7 +9,7 @@ export const useArrowControl = () => {
       }
     };
 
-  const commandFatory = (key: ActionNavigateTypeKeys) => {
+  const commandFactory = (key: ActionNavigateTypeKeys) => {
     return {
       onPlay: (action: (e: KeyboardEvent) => void) => {
         const command = wrap(action, key);
@@ -25,11 +23,9 @@ export const useArrowControl = () => {
   };
 
   return {
-    up: commandFatory(ActionNavigateTypeKeys.ARROW_UP),
-    down: commandFatory(ActionNavigateTypeKeys.ARROW_DOWN),
-    left: commandFatory(ActionNavigateTypeKeys.ARROW_LEFT),
-    right: commandFatory(ActionNavigateTypeKeys.ARROW_RIGHT),
-    keys,
-    setKeys,
+    up: commandFactory(ActionNavigateTypeKeys.ARROW_UP),
+    down: commandFactory(ActionNavigateTypeKeys.ARROW_DOWN),
+    left: commandFactory(ActionNavigateTypeKeys.ARROW_LEFT),
+    right: commandFactory(ActionNavigateTypeKeys.ARROW_RIGHT)
   };
 };
