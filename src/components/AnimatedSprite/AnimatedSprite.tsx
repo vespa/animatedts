@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import styles from "./CharSprite.module.scss";
+import styles from "./AnimatedSprite.module.scss";
 import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
-interface CharSpriteProps {
+interface AnimatedSpriteProps {
+  /** fixed position on stage */
+  postion?: {
+    left: string | number;
+    top: string | number;
+  };
   /** default sprite position when animation is stopped */
   defaultPos?: number;
   /** defines if the animation should be triggered. If not, it assumes default position */
@@ -31,7 +36,7 @@ interface CharSpriteProps {
  *
  * */
 
-export const CharSprite: React.FC<CharSpriteProps> = ({
+export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
   defaultPos = 0,
   running = false,
   width,
@@ -43,6 +48,7 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   toTop = [],
   staticElementMoves = [],
   direction = ActionNavigateTypeKeys.STATIC_MOVES,
+  postion = {}
 }) => {
   const defaultMainPos = -(defaultPos * width);
   let interval: NodeJS.Timeout;
@@ -98,7 +104,7 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   }, [steps, running, direction]);
 
   return (
-    <div className={styles.char} style={{ width, height }}>
+    <div className={styles.char} style={{ width, height, ...postion }}>
       <div
         className={styles.char__container}
         style={{ left: current ?? defaultMainPos }}
@@ -109,4 +115,4 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   );
 };
 
-export default CharSprite;
+export default AnimatedSprite;

@@ -1,3 +1,3 @@
-export * from "./CharSprite";
-export * from "./CharSpriteNavByArrows";
+export * from "./AnimatedSprite";
+export * from "./AnimatedSpriteNavByArrows";
 export * from "./Stage";

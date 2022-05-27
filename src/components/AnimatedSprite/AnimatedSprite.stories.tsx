@@ -1,15 +1,15 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { CharSprite } from "components";
+import { AnimatedSprite } from "components/AnimatedSprite";
 import mainSprite from "static/sprites/jetpack_sprite.png";
 import { ActionNavigateTypeKeys } from "state/action-types";
 
 export default {
-  title: "Example/CharSprite",
-  component: CharSprite,
-} as ComponentMeta<typeof CharSprite>;
+  title: "Example/AnimatedSprite",
+  component: AnimatedSprite,
+} as ComponentMeta<typeof AnimatedSprite>;
 
-const Template: ComponentStory<typeof CharSprite> = (args) => (
-  <CharSprite {...args} />
+const Template: ComponentStory<typeof AnimatedSprite> = (args) => (
+  <AnimatedSprite {...args} />
 );
 
 export const charSprite = Template.bind({});

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { NavArrowsProps } from "state/action-types";
 import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
 import { NavArrows } from "components/NavArrows";
-import CharSprite from "components/CharSprite/CharSprite";
+import AnimatedSprite from "components/AnimatedSprite/AnimatedSprite";
 
-interface CharSpriteProps {
+interface AnimatedSpriteProps {
   /** default sprite position when animation is stopped */
   defaultPos?: number;
   /** defines if the animation should be triggered. If not, it assumes default position */
@@ -33,9 +33,9 @@ interface CharSpriteProps {
  *
  * */
 
-interface CharSpriteNavProps extends CharSpriteProps, NavArrowsProps { }
+interface AnimatedSpriteNavProps extends AnimatedSpriteProps, NavArrowsProps { }
 
-export const CharSpriteNavByArrows: React.FC<CharSpriteNavProps> = (props) => {
+export const AnimatedSpriteNavByArrows: React.FC<AnimatedSpriteNavProps> = (props) => {
   const [direction, setDirection] = useState<DirectionTypes>(
     ActionNavigateTypeKeys.ARROW_LEFT
   );
@@ -49,8 +49,8 @@ export const CharSpriteNavByArrows: React.FC<CharSpriteNavProps> = (props) => {
       setRunning={setRunning}
       running={running}
     >
-      <CharSprite {...rest} direction={direction} running={running} />
+      <AnimatedSprite {...rest} direction={direction} running={running} />
     </NavArrows>
   );
 };
-export default CharSpriteNavByArrows;
+export default AnimatedSpriteNavByArrows;

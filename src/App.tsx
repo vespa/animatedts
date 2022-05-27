@@ -3,7 +3,7 @@ import "./App.css";
 // import { bindActionCreators } from "redux";
 // import { navigateActionCreator } from "./state";
 import { navigateActionCreator } from "state";
-import { Stage, CharSpriteNavByArrows, CharSprite } from "components";
+import { Stage, AnimatedSpriteNavByArrows, AnimatedSprite } from "components";
 import mainSprite from "static/sprites/jetpack_sprite.png";
 import { useSelector } from "react-redux";
 import { RootState } from "state/reducers";
@@ -11,8 +11,8 @@ import { useEffect } from "react";
 
 
 const MainChar = () => (
-  <CharSpriteNavByArrows
-    startPosition={{ left: "50%", top: "50%" }}
+  <AnimatedSpriteNavByArrows
+    startPosition={{ left: "10%", top: "50%" }}
     id={"MainChar"}
     running={true}
     defaultPos={5}
@@ -27,7 +27,8 @@ const MainChar = () => (
 )
 
 const StaticChar = () => (
-  <CharSprite
+  <AnimatedSprite
+    postion={{ left: "0%", top: "10%" }}
     sprite={mainSprite}
     defaultPos={5}
     height={120}
