@@ -12,6 +12,8 @@ export enum ActionNavigateTypeKeys {
   ARROW_DOWN = "ArrowDown",
   ARROW_LEFT = "ArrowLeft",
   ARROW_RIGHT = "ArrowRight",
+  // Other movements
+  STATIC_MOVES = 'static'
 }
 // convert enum ActionNavigateTypeKeys into type
 export type DirectionTypes = `${ActionNavigateTypeKeys}`

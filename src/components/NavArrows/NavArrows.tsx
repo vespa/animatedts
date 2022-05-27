@@ -27,6 +27,7 @@ export const NavArrows: React.FC<NavArrowsProps> = ({
   const dispatch = useDispatch();
   const { registerPosition, moveLeft, moveDown, moveRight, moveTop } =
     bindActionCreators(navigateActionCreator, dispatch);
+
   const { stage, navigate } = useSelector((state: RootState) => state);
   const elemRef = useRef(null);
   const elemCounter = useRef(null);
@@ -134,6 +135,7 @@ export const NavArrows: React.FC<NavArrowsProps> = ({
       [ActionNavigateTypeKeys.ARROW_RIGHT]: () => moveRight(id, posX <= stage.width ? mov : -mov),
       [ActionNavigateTypeKeys.ARROW_UP]: () => moveTop(id, posY <= 0 ? -mov : mov),
       [ActionNavigateTypeKeys.ARROW_DOWN]: () => moveDown(id, posY <= stage.height ? mov : -mov),
+      [ActionNavigateTypeKeys.STATIC_MOVES]: () => moveDown(id, posY <= stage.height ? mov : -mov),
     };
     key && commands[key]();
   }

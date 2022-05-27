@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { NavArrowsProps } from "state/action-types";
-
 import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
 import { NavArrows } from "components/NavArrows";
 import CharSprite from "components/CharSprite/CharSprite";

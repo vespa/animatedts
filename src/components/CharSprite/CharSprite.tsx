@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./CharSprite.module.scss";
-
 import { DirectionTypes, ActionNavigateTypeKeys } from "state/action-types";
 interface CharSpriteProps {
   /** default sprite position when animation is stopped */
@@ -14,14 +13,15 @@ interface CharSpriteProps {
   /** src for sprite image */
   sprite: string;
   /** selected sprites for animation when left vector is running */
-  toLeft: number[];
+  toLeft?: number[];
   /** selected sprites for animation when right vector is running */
-  toRight: number[];
+  toRight?: number[];
   /** selected sprites for animation when down vector is running */
-  toBottom: number[];
+  toBottom?: number[];
   /** selected sprites for animation when up vector is running */
-  toTop: number[];
+  toTop?: number[];
   /** defines with set of sprites should be triggered */
+  staticElementMoves?: number[];
   direction?: DirectionTypes;
 }
 
@@ -41,7 +41,8 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   toRight = [],
   toBottom = [],
   toTop = [],
-  direction = ActionNavigateTypeKeys.ARROW_DOWN,
+  staticElementMoves = [],
+  direction = ActionNavigateTypeKeys.STATIC_MOVES,
 }) => {
   const defaultMainPos = -(defaultPos * width);
   let interval: NodeJS.Timeout;
@@ -49,18 +50,19 @@ export const CharSprite: React.FC<CharSpriteProps> = ({
   const [steps, setSteps] = useState<number[]>([]);
   const [current, setCurrent] = useState<number>(defaultMainPos);
 
-  const configureAnimatioin = (values: number[]) => {
+  const configureAnimation = (values: number[]) => {
     const stepsPos = values.map((item: number) => -(item * width));
     setSteps(stepsPos);
   };
 
   const changeDirection = {
-    [ActionNavigateTypeKeys.ARROW_LEFT]: () => configureAnimatioin(toLeft),
+    [ActionNavigateTypeKeys.ARROW_LEFT]: () => configureAnimation(toLeft),
     [ActionNavigateTypeKeys.ARROW_RIGHT]: () => {
-      configureAnimatioin(toRight);
+      configureAnimation(toRight);
     },
-    [ActionNavigateTypeKeys.ARROW_UP]: () => configureAnimatioin(toTop),
-    [ActionNavigateTypeKeys.ARROW_DOWN]: () => configureAnimatioin(toBottom),
+    [ActionNavigateTypeKeys.ARROW_UP]: () => configureAnimation(toTop),
+    [ActionNavigateTypeKeys.ARROW_DOWN]: () => configureAnimation(toBottom),
+    [ActionNavigateTypeKeys.STATIC_MOVES]: () => configureAnimation(staticElementMoves),
   };
 
   useEffect(() => {

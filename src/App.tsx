@@ -2,8 +2,12 @@ import "./App.css";
 // import { useDispatch } from "react-redux";
 // import { bindActionCreators } from "redux";
 // import { navigateActionCreator } from "./state";
-import { Stage, CharSpriteNavByArrows } from "components";
+import { navigateActionCreator } from "state";
+import { Stage, CharSpriteNavByArrows, CharSprite } from "components";
 import mainSprite from "static/sprites/jetpack_sprite.png";
+import { useSelector } from "react-redux";
+import { RootState } from "state/reducers";
+import { useEffect } from "react";
 
 
 const MainChar = () => (
@@ -22,8 +26,23 @@ const MainChar = () => (
   />
 )
 
+const StaticChar = () => (
+  <CharSprite
+    sprite={mainSprite}
+    defaultPos={5}
+    height={120}
+    running
+    staticElementMoves={[13, 12, 14]}
+    width={73}
+  />
+)
+
 
 function App() {
+  const state = useSelector((state: RootState) => state);
+  useEffect(() => {
+    console.log(state)
+  }, [state])
   return (
     <div className="App">
       {/* <button onClick={() => moveTop(char1, goto)}>Move top</button>
@@ -34,7 +53,7 @@ function App() {
 
       <button onClick={() => moveRight("char2", goto)}>Move right 2</button> */}
       <Stage size={{ width: 800, height: 600 }}>
-
+        <StaticChar />
         <MainChar />
       </Stage>
     </div>
