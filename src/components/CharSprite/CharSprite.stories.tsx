@@ -35,6 +35,7 @@ const TemplateNAV: ComponentStory<typeof CharSpriteArrowNav> = (args) => (
 );
 export const charSpriteArrowNav = TemplateNAV.bind({});
 
+charSpriteArrowNav.parameters = { controls: { exclude: /^direction*/ } };
 charSpriteArrowNav.args = {
   id: "test",
   running: true,

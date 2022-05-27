@@ -23,6 +23,7 @@ interface CharSpriteProps {
   toBottom: number[];
   /** selected sprites for animation when up vector is running */
   toTop: number[];
+  /** defines with set of sprites should be triggered */
   direction: DirectionTypes;
 }
 
