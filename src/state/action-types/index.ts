@@ -10,15 +10,6 @@ export enum ActionNavigateType {
   RUNNING = "running",
 }
 
-export type ActionTypes =
-  | ActionNavigateType.ArrowDown
-  | ActionNavigateType.ArrowUp
-  | ActionNavigateType.ArrowLeft
-  | ActionNavigateType.ArrowRight
-  | ActionNavigateType.REGISTER
-  | ActionNavigateType.REGISTER_LEFT
-  | ActionNavigateType.REGISTER_TOP;
-
 export type DirectionTypes =
   | ActionNavigateType.ArrowDown
   | ActionNavigateType.ArrowUp

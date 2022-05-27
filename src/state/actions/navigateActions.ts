@@ -1,14 +1,14 @@
-import { ActionTypes } from "../action-types";
+import { ActionNavigateType } from "../action-types";
 
 export interface ActionNavigate {
   id: string;
-  type: ActionTypes;
+  type: ActionNavigateType;
   payload: number;
 }
 
 export interface ActionNavigateRun {
   id: string;
-  type: ActionTypes;
+  type: ActionNavigateType;
   payload: number;
 }
 
@@ -18,6 +18,6 @@ export interface ActionNavigateFixPayload {
 }
 export interface ActionNavigateFix {
   id: string;
-  type: ActionTypes;
+  type: ActionNavigateType;
   payload: ActionNavigateFixPayload;
 }

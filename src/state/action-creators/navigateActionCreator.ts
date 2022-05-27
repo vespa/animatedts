@@ -2,7 +2,7 @@ import { Dispatch } from "redux";
 import { ActionNavigateType } from "../action-types";
 import {
   ActionNavigate,
-  ActionNavigateFix,
+  // ActionNavigateFix,
   ActionNavigateFixPayload,
 } from "../actions";
 
