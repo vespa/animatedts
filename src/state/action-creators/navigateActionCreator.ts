@@ -3,7 +3,6 @@ import { ActionNavigateTypeKeys, ActionNavigateTypeSetPos } from "../action-type
 import {
   ActionNavigate,
   ActionNavigateFixPayload,
-  ActionNavigateRun,
 } from "../actions";
 
 export const moveTop = (id: string, pos: number) => {
@@ -47,7 +46,7 @@ export const moveLeft = (id: string, pos: number) => {
 };
 
 export const registerPosition = (id: string, pos: ActionNavigateFixPayload) => {
-  return (dispatch: Dispatch<ActionNavigateRun>) => {
+  return (dispatch: Dispatch<ActionNavigate>) => {
     dispatch({
       id,
       type: ActionNavigateTypeSetPos.REGISTER_TOP,

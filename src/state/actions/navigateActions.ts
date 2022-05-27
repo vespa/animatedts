@@ -2,13 +2,7 @@ import { ActionNavigateTypeKeys, ActionNavigateTypeSetPos } from "../action-type
 
 export interface ActionNavigate {
   id: string;
-  type: ActionNavigateTypeKeys;
-  payload: number;
-}
-
-export interface ActionNavigateRun {
-  id: string;
-  type: ActionNavigateTypeSetPos;
+  type: ActionNavigateTypeKeys | ActionNavigateTypeSetPos;
   payload: number;
 }
 

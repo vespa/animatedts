@@ -4,7 +4,7 @@ import {
   PositionProps,
   CharGroupProps,
 } from "../action-types";
-import { ActionNavigate, ActionNavigateRun } from "../actions";
+import { ActionNavigate } from "../actions";
 
 const initialState: PositionProps = {
   left: 0,
@@ -14,7 +14,7 @@ const initialState: PositionProps = {
 
 const reducerNavigation = (
   state: CharGroupProps = {},
-  { id, type, payload }: ActionNavigate | ActionNavigateRun
+  { id, type, payload }: ActionNavigate 
 ): CharGroupProps => {
   const getCurrent = state[id] || initialState;
   switch (type) {
