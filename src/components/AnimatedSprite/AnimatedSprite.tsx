@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from "react";
 import styles from "./AnimatedSprite.module.scss";
 import { DirectionTypes, DirectionsNavigateKeys } from "state/action-types";
-interface AnimatedSpriteProps {
+export interface AnimatedSpriteProps {
   /** fixed position on stage */
   id?: string,
   position?: {
