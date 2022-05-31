@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { useSelector } from "react-redux";
 import { DirectionTypes, DirectionsNavigateKeys } from "state/action-types";
@@ -12,19 +12,27 @@ import { RootState } from "state/reducers";
  * */
 const NavByClick: React.FC = ({ children }) => {
   const { stage } = useSelector((state: RootState) => state.stage);
-  useEffect(() => {
-    stage && console.log(stage)
+  const configureStage = useCallback(() => {
+    stage?.addEventListener("click", (e: MouseEvent) => {
+      e.preventDefault()
+      console.log("x", e.offsetY)
+      console.log("y", e.offsetX)
+    })
   }, [stage])
+
+  useEffect(() => {
+    stage && configureStage()
+  }, [stage, configureStage])
 
   return <>{children}</>
 }
 
 export const AnimatedSpriteNavByClick: React.FC<AnimatedSpriteProps> = (props) => {
 
-  const [direction, setDirection] = useState<DirectionTypes>(
+  const [direction] = useState<DirectionTypes>(
     DirectionsNavigateKeys.LEFT
   );
-  const [running, setRunning] = useState<boolean>(false);
+  const [running] = useState<boolean>(false);
   const { id, ...rest } = props;
   return (
     <NavByClick>
