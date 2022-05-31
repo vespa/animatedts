@@ -11,26 +11,27 @@ import styles from "./AnimatedSpriteNavByClick.module.scss";
  * Each tile should have exactly the same width and the image should be perfectly centralized according to expected effect
  *
  * */
-type navByClickProps = {
-  className: string
-}
-const NavByClick: React.FC<navByClickProps> = ({ children, className }) => {
+
+const NavByClick: React.FC = ({ children }) => {
   const [top, setTop] = useState<number | string>("")
   const [left, setLeft] = useState<number | string>("")
   const { stage } = useSelector((state: RootState) => state.stage);
+
+  const moveSprite = (e: MouseEvent) => {
+    e.preventDefault()
+    setTop(e.offsetY)
+    setLeft(e.offsetX)
+  }
   const configureStage = useCallback(() => {
-    stage?.addEventListener("click", (e: MouseEvent) => {
-      e.preventDefault()
-      setTop(e.offsetY)
-      setLeft(e.offsetX)
-    })
+    stage?.removeEventListener("click", moveSprite, true)
+    stage?.addEventListener("click", moveSprite, true)
   }, [stage])
 
   useEffect(() => {
     stage && configureStage()
   }, [stage, configureStage])
 
-  return <div className={className} style={{ top, left }}>{children}</div>
+  return <div className={`${styles.char}`} onClick={e => e.preventDefault()} style={{ top, left }}>{top} {left} {children}</div>
 }
 
 export const AnimatedSpriteNavByClick: React.FC<AnimatedSpriteProps> = (props) => {
@@ -41,7 +42,7 @@ export const AnimatedSpriteNavByClick: React.FC<AnimatedSpriteProps> = (props) =
   const [running] = useState<boolean>(false);
   const { id, ...rest } = props;
   return (
-    <NavByClick className={`${styles.char}`}>
+    <NavByClick>
       <AnimatedSprite {...rest} direction={direction} running={running} id={id} />
     </NavByClick>
   );
