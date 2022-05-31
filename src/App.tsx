@@ -40,10 +40,10 @@ const StaticChar = () => (
 
 
 function App() {
-  const state = useSelector((state: RootState) => state);
-  useEffect(() => {
-    console.log(state)
-  }, [state])
+  // const state = useSelector((state: RootState) => state);
+  // useEffect(() => {
+  //   console.log(state)
+  // }, [state])
   return (
     <div className="App">
       {/* <button onClick={() => moveTop(char1, goto)}>Move top</button>

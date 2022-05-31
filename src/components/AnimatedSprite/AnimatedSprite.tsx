@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import styles from "./AnimatedSprite.module.scss";
 import { DirectionTypes, DirectionsNavigateKeys } from "state/action-types";
 interface AnimatedSpriteProps {
   /** fixed position on stage */
+  id?: string,
   position?: {
     left: string | number;
     top: string | number;
@@ -37,6 +38,7 @@ interface AnimatedSpriteProps {
  * */
 
 export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
+  id,
   defaultPos = 0,
   running = false,
   width,
@@ -52,7 +54,7 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
 }) => {
   const defaultMainPos = -(defaultPos * width);
   let interval: NodeJS.Timeout;
-  //   const [animateFrames, setAnimateFrames] = useState(toLeft);
+
   const [steps, setSteps] = useState<number[]>([]);
   const [current, setCurrent] = useState<number>(defaultMainPos);
 
@@ -71,11 +73,11 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
     [DirectionsNavigateKeys.STATIC_MOVES]: () => configureAnimation(staticElementMoves),
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     changeDirection[direction]();
   }, [direction]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const callNextSteps = (steps: number[], index = 0) => {
       if (steps.length === 0) {
         return false;
@@ -104,7 +106,7 @@ export const AnimatedSprite: React.FC<AnimatedSpriteProps> = ({
   }, [steps, running, direction]);
 
   return (
-    <div className={styles.char} style={{ width, height, ...position }}>
+    <div className={styles.char} style={{ width, height, ...position }} id={id} data-testid={id}>
       <div
         className={styles.char__container}
         style={{ left: current ?? defaultMainPos }}
