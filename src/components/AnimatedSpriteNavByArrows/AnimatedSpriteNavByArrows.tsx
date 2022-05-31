@@ -23,8 +23,6 @@ interface AnimatedSpriteProps {
   toBottom: number[];
   /** selected sprites for animation when up vector is running */
   toTop: number[];
-  /** defines with set of sprites should be triggered */
-  direction?: DirectionTypes;
 }
 
 /**
@@ -49,7 +47,7 @@ export const AnimatedSpriteNavByArrows: React.FC<AnimatedSpriteNavProps> = (prop
       setRunning={setRunning}
       running={running}
     >
-      <AnimatedSprite {...rest} direction={direction} running={running} />
+      <AnimatedSprite {...rest} direction={direction} running={running} id={id} />
     </NavArrows>
   );
 };

@@ -8,3 +8,6 @@ export const renderWithProviders = (
 ) => {
     return render(<Provider store={store}>{ui}</Provider>);
 };
+
+export const wait = async (time: number) => await new Promise((r) => setTimeout(r, time));
+
