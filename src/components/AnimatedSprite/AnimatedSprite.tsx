@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import styles from "./AnimatedSprite.module.scss";
 import { DirectionTypes, DirectionsNavigateKeys } from "state/action-types";
 interface AnimatedSpriteProps {
