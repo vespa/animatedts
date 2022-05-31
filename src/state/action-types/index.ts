@@ -1,4 +1,4 @@
-import { ReactChildren, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export enum ActionNavigateTypeSetPos {
   FIXED = "fixed",
@@ -36,6 +36,7 @@ export interface StateStageProps {
   width: number;
   height: number;
   loaded?: boolean;
+  stage?: HTMLElement
 }
 
 export enum ActionStageType {

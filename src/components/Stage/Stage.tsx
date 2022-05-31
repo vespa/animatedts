@@ -1,4 +1,4 @@
-import React, { ReactChild, ReactNode, useEffect } from "react";
+import React, { ReactChild, ReactNode, useEffect, useRef } from "react";
 import styles from "./Stage.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -11,18 +11,20 @@ interface StageProps {
 }
 
 export const Stage: React.FC<StageProps> = ({ children, size }) => {
+  const ref = useRef(null)
   const stageProps = useSelector((state: RootState) => state.stage);
   const dispatch = useDispatch();
   const { setStageSize } = bindActionCreators(stageActionCreator, dispatch);
 
   useEffect(() => {
-    setStageSize({
+    ref.current && setStageSize({
       ...size,
       loaded: true,
+      stage: ref.current
     });
-  }, []);
+  }, [ref]);
   return (
-    <div className={styles.stage} style={{ ...stageProps }}>
+    <div className={styles.stage} style={{ ...stageProps }} ref={ref}>
       {children}
     </div>
   );
